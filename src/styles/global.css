@@ -65,6 +65,44 @@
   border-bottom: 1px solid var(--border-subtle);
 }
 
+/* Scroll-triggered entrance choreography (emil-design-eng / find-animation-opportunities) */
+[data-reveal] {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  transition:
+    opacity var(--dur-reveal) var(--ease-out-quint),
+    transform var(--dur-reveal) var(--ease-out-quint);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+
+[data-reveal][data-revealed="false"] {
+  opacity: 0;
+  transform: translateY(14px) scale(0.985);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  [data-reveal] {
+    transform: none !important;
+    transition: opacity 200ms ease !important;
+  }
+  [data-reveal][data-revealed="false"] {
+    opacity: 0;
+    transform: none !important;
+  }
+}
+
+.nf-number {
+  display: inline-block;
+  font: inherit;
+  font-variant-numeric: tabular-nums;
+  line-height: inherit;
+  --number-flow-mask-height: 0.12em;
+  --number-flow-mask-width: 0.18em;
+}
+
 @media (max-width: 767px) {
   .rail-container,
   .rail-container-light {

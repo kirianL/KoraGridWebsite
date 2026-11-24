@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { AnimatePresence, motion } from "motion/react";
 import { PulseWaveIcon } from "./Icons";
 
 interface SplitTraceabilityProps {
@@ -64,7 +65,7 @@ export const SplitTraceability: React.FC<SplitTraceabilityProps> = ({ onOpenDemo
     <section id="trazabilidad" className="bg-[var(--bg-canvas)]">
       <div className="rail-container grid grid-cols-1 bg-[var(--bg-surface-primary)] lg:grid-cols-12">
         {/* Left Column (~38%): Continuous natural prose with inline [1]..[5] badges on all viewports */}
-        <div className="flex flex-col justify-start border-b border-[var(--border-subtle)] px-5 py-10 sm:p-10 lg:col-span-5 lg:border-r lg:border-b-0 lg:p-12">
+        <div data-reveal className="flex flex-col justify-start border-b border-[var(--border-subtle)] px-5 py-10 sm:p-10 lg:col-span-5 lg:border-r lg:border-b-0 lg:p-12">
           <h2 className="text-[28px] font-normal leading-[1.12] tracking-[-0.025em] text-[var(--text-primary)] sm:text-[38px]">
             Precisión verificable en cada circuito
           </h2>
@@ -112,14 +113,23 @@ export const SplitTraceability: React.FC<SplitTraceabilityProps> = ({ onOpenDemo
             className="pointer-events-none absolute inset-0 h-full w-full object-cover select-none"
           />
 
-          {/* Centered editorial telemetry quote */}
-          <div className="relative z-10 m-auto max-w-[460px] px-2 text-center sm:px-4">
-            <p className="text-[19px] font-normal leading-[1.45] tracking-[-0.01em] text-[#092616] sm:text-[22px]">
-              <span className="mr-2 inline-block rounded-[4px] bg-white/80 px-2 py-0.5 font-medium text-[#062413] backdrop-blur-sm">
-                [{current.tag}]
-              </span>
-              {current.cardText}
-            </p>
+          {/* Centered editorial telemetry quote with smooth motion reveal */}
+          <div className="relative z-10 m-auto flex min-h-[140px] max-w-[460px] items-center justify-center px-2 text-center sm:px-4">
+            <AnimatePresence mode="wait">
+              <motion.p
+                key={current.id}
+                initial={{ opacity: 0, y: 8 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -8 }}
+                transition={{ duration: 0.22, ease: [0.16, 1, 0.3, 1] }}
+                className="text-[19px] font-normal leading-[1.45] tracking-[-0.01em] text-[#092616] sm:text-[22px]"
+              >
+                <span className="mr-2 inline-block rounded-[4px] bg-white/80 px-2 py-0.5 font-medium text-[#062413] backdrop-blur-sm">
+                  [{current.tag}]
+                </span>
+                {current.cardText}
+              </motion.p>
+            </AnimatePresence>
           </div>
 
           {/* Bottom controls flush inside corners (exact Image 2) */}

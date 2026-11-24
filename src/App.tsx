@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useReveal } from "./hooks/useReveal";
 import { Navbar } from "./components/Navbar";
 import { HeroTelemetry } from "./components/HeroTelemetry";
 import { StandardsBar } from "./components/StandardsBar";
@@ -13,6 +14,7 @@ import { DemoContactModal } from "./components/DemoContactModal";
 
 export const App: React.FC = () => {
   const [isDemoOpen, setIsDemoOpen] = useState(false);
+  useReveal();
 
   return (
     <div className="min-h-screen bg-[var(--bg-canvas)] text-[var(--text-primary)]">

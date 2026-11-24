@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import NumberFlow from "@number-flow/react";
 import { HERO_DATA, TELEMETRY_SECTORS } from "../data/koragrid";
 import { HeroSpectrumSvg } from "./HeroSpectrumSvg";
 import { GlobeIcon, PauseIcon, PlayIcon, SectorChipIcon } from "./Icons";
@@ -21,10 +22,19 @@ const TuneSparkIcon: React.FC<{ className?: string }> = ({ className = "h-3.5 w-
   </svg>
 );
 
-const CONSOLE_LINES: Record<string, string> = {
-  "zonas-francas": "Planta Alajuela en línea: 412.8 kW sin picos de demanda.",
-  hoteleria: "Complejo Guanacaste: 684.5 kW con alerta punta preventiva.",
-  agroindustria: "Empacadora Zona Norte: 529.1 kW auditados bajo ISO 14064.",
+const CONSOLE_SECTORS: Record<string, { prefix: string; suffix: string }> = {
+  "zonas-francas": {
+    prefix: "Planta Alajuela en línea:",
+    suffix: "sin picos de demanda.",
+  },
+  hoteleria: {
+    prefix: "Complejo Guanacaste:",
+    suffix: "con alerta punta preventiva.",
+  },
+  agroindustria: {
+    prefix: "Empacadora Zona Norte:",
+    suffix: "auditados bajo ISO 14064.",
+  },
 };
 
 export const HeroTelemetry: React.FC<HeroTelemetryProps> = ({ onOpenDemo }) => {
@@ -43,20 +53,17 @@ export const HeroTelemetry: React.FC<HeroTelemetryProps> = ({ onOpenDemo }) => {
   }, [isSimulating]);
 
   const baseKw = parseFloat(sector.readingKw.replace(" kW", ""));
-  const liveKw = isSimulating
-    ? `${(baseKw + (pulseTick === 0 ? 1.4 : pulseTick === 1 ? -0.9 : 0.6)).toFixed(1)} kW`
-    : sector.readingKw;
+  const currentKw = isSimulating
+    ? Number((baseKw + (pulseTick === 0 ? 1.4 : pulseTick === 1 ? -0.9 : 0.6)).toFixed(1))
+    : baseKw;
 
-  const baseLine = CONSOLE_LINES[sector.id] ?? CONSOLE_LINES["zonas-francas"];
-  const displayLine = isSimulating
-    ? baseLine.replace(/\d+\.\d+\s*kW/, liveKw)
-    : baseLine;
+  const consoleConfig = CONSOLE_SECTORS[sector.id] ?? CONSOLE_SECTORS["zonas-francas"];
 
   return (
     <section id="plataforma" className="bg-[var(--bg-canvas)]">
       <div className="rail-container flex min-h-[calc(100lvh-56px-env(safe-area-inset-top))] flex-col justify-between bg-[var(--bg-surface-primary)] pt-10 sm:block sm:min-h-0 sm:pt-16">
-        {/* Centered 2-line Hero Copy (exact reference proportions) */}
-        <div className="mx-auto my-auto max-w-[660px] px-5 py-3 text-center sm:my-0 sm:px-8 sm:py-0">
+        {/* Centered 2-line Hero Copy with scroll reveal */}
+        <div data-reveal className="mx-auto my-auto max-w-[660px] px-5 py-3 text-center sm:my-0 sm:px-8 sm:py-0">
           <h1 className="text-[31px] font-normal leading-[1.08] tracking-[-0.03em] text-[var(--text-primary)] sm:text-[50px]">
             {HERO_DATA.title}
           </h1>
@@ -93,17 +100,26 @@ export const HeroTelemetry: React.FC<HeroTelemetryProps> = ({ onOpenDemo }) => {
 
           {/* Translucent Smoked-Glass Console Card (authentic glassmorphism matching reference) */}
           <div
+            data-reveal
             className="relative z-10 mx-auto mb-[72px] flex min-h-[156px] max-w-[650px] flex-col justify-between rounded-[8px] border border-white/[0.12] px-4 py-4 backdrop-blur-2xl sm:mb-[102px] sm:min-h-[164px] sm:px-6 sm:py-5"
             style={{
               background:
                 "linear-gradient(180deg, rgba(36, 36, 38, 0.72) 0%, rgba(22, 22, 24, 0.56) 100%)",
               boxShadow:
                 "inset 0 1px 0 rgba(255, 255, 255, 0.12), 0 28px 64px rgba(0, 0, 0, 0.58)",
-            }}
+              "--reveal-delay": "120ms",
+            } as React.CSSProperties}
           >
-            {/* Single clean prompt line (minimal text, identical to reference) */}
+            {/* Single clean prompt line with animated NumberFlow live telemetry */}
             <p className="text-[13.5px] font-normal leading-[1.5] text-[#f4f4f5]/95 tabular-nums sm:text-[14px]">
-              {displayLine}
+              <span>{consoleConfig.prefix}</span>{" "}
+              <NumberFlow
+                value={currentKw}
+                format={{ minimumFractionDigits: 1, maximumFractionDigits: 1 }}
+                suffix=" kW"
+                className="nf-number font-semibold text-[#4ade80]"
+              />{" "}
+              <span>{consoleConfig.suffix}</span>
             </p>
 
             {/* Mobile: structured 3-col tabs + full-width bottom action row | Desktop: single horizontal row */}

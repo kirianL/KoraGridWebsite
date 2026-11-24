@@ -7,7 +7,7 @@ export const SplitArchitecture: React.FC = () => {
   return (
     <section id="arquitectura" className="bg-[var(--bg-canvas)]">
       <div className="rail-container grid grid-cols-1 items-center bg-[var(--bg-surface-primary)] px-5 py-12 sm:px-12 sm:py-20 lg:grid-cols-12 lg:gap-12 lg:px-16 lg:py-24">
-        <div className="lg:col-span-6">
+        <div data-reveal className="lg:col-span-6">
           <p className="text-[18px] font-normal leading-[1.48] tracking-[-0.015em] text-[#9a9a9e] sm:text-[23px] sm:leading-[1.42]">
             Los equipos de ingeniería integran telemetría en vivo{" "}
             <PulseWaveIcon className="mx-1 inline h-[18px] w-[18px] -translate-y-[1px] text-[#e4e4e7] sm:h-[21px] sm:w-[21px]" />

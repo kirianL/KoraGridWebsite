@@ -42,7 +42,7 @@ export const LightChallengesSection: React.FC = () => {
 
       {/* Main White Challenges Grid with 4 Corner Registration Dots */}
       <div className="rail-container-light bg-[var(--bg-light-canvas)] px-5 py-12 sm:px-10 sm:py-20 lg:px-12 lg:py-24">
-        <div className="max-w-[580px]">
+        <div data-reveal className="max-w-[580px]">
           <h2 className="text-[28px] font-medium leading-[1.12] tracking-[-0.025em] text-[var(--text-on-light-primary)] sm:text-[42px]">
             {LIGHT_CHALLENGES.title}
           </h2>
@@ -53,9 +53,11 @@ export const LightChallengesSection: React.FC = () => {
 
         {/* 3-column engineering cards with 4 corner registration dots */}
         <div className="mt-9 grid grid-cols-1 gap-4 sm:mt-12 sm:gap-6 md:grid-cols-3">
-          {LIGHT_CHALLENGES.pillars.map((pillar) => (
+          {LIGHT_CHALLENGES.pillars.map((pillar, idx) => (
             <article
               key={pillar.id}
+              data-reveal
+              style={{ "--reveal-delay": `${idx * 100}ms` } as React.CSSProperties}
               className="relative flex flex-col border border-[var(--border-light-subtle)] bg-[var(--bg-light-canvas)] p-4 transition-colors duration-150 hover:border-[var(--border-light-strong)] sm:p-5"
             >
               {/* 4 corner registration dots */}
