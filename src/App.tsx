@@ -1,14 +1,6 @@
-import React, { useEffect, useRef, useState } from "react";
-import { AnimatePresence, motion } from "motion/react";
+import React, { useState } from "react";
 import { useLenis } from "./hooks/useLenis";
 import { useReveal } from "./hooks/useReveal";
-import {
-  matchHashRoute,
-  resolveRoute,
-  ROUTE_PATHS,
-  ROUTE_TITLES,
-  type Route,
-} from "./routing/routes";
 import { Navbar } from "./components/Navbar";
 import { HeroTelemetry } from "./components/HeroTelemetry";
 import { StandardsBar } from "./components/StandardsBar";
@@ -20,143 +12,30 @@ import { ContextualPrecisionCarousel } from "./components/ContextualPrecisionCar
 import { RegionalTelemetryMap } from "./components/RegionalTelemetryMap";
 import { ClosingCtaAndFooter } from "./components/ClosingCtaAndFooter";
 import { DemoContactModal } from "./components/DemoContactModal";
-import { HardwareTelemetryPage } from "./pages/HardwareTelemetryPage";
-import { DemandSimulatorPage } from "./pages/DemandSimulatorPage";
-import { EsgAuditPage } from "./pages/EsgAuditPage";
 
 export const App: React.FC = () => {
-  const [route, setRoute] = useState<Route>(resolveRoute);
   const [isDemoOpen, setIsDemoOpen] = useState(false);
-  const pendingSection = useRef<string | null>(null);
-  const isInitialMount = useRef(true);
-  const lenisRef = useLenis();
-
-  useReveal(route);
-
-  useEffect(() => {
-    document.title = ROUTE_TITLES[route];
-
-    if (isInitialMount.current) {
-      isInitialMount.current = false;
-      return;
-    }
-
-    const section = pendingSection.current;
-    pendingSection.current = null;
-
-    if (section) {
-      window.setTimeout(() => {
-        if (lenisRef.current) {
-          lenisRef.current.scrollTo(section, { offset: -56 });
-        } else {
-          document.querySelector(section)?.scrollIntoView({ behavior: "smooth", block: "start" });
-        }
-      }, 60);
-    } else if (lenisRef.current) {
-      lenisRef.current.scrollTo(0, { immediate: true });
-    } else {
-      window.scrollTo({ top: 0, left: 0, behavior: "instant" as ScrollBehavior });
-    }
-  }, [route, lenisRef]);
-
-  useEffect(() => {
-    const syncRoute = () => {
-      const next = resolveRoute();
-      if (matchHashRoute(window.location.hash)) {
-        window.history.replaceState({}, "", ROUTE_PATHS[next]);
-      }
-      setRoute(next);
-    };
-
-    window.addEventListener("popstate", syncRoute);
-    window.addEventListener("hashchange", syncRoute);
-    return () => {
-      window.removeEventListener("popstate", syncRoute);
-      window.removeEventListener("hashchange", syncRoute);
-    };
-  }, []);
-
-  const navigateTo = (next: Route, sectionHash?: string) => {
-    if (next === route) {
-      if (sectionHash) {
-        if (lenisRef.current) {
-          lenisRef.current.scrollTo(sectionHash, { offset: -56 });
-        } else {
-          document.querySelector(sectionHash)?.scrollIntoView({ behavior: "smooth", block: "start" });
-        }
-      } else if (lenisRef.current) {
-        lenisRef.current.scrollTo(0);
-      } else {
-        window.scrollTo({ top: 0, behavior: "smooth" });
-      }
-      return;
-    }
-
-    pendingSection.current = sectionHash ?? null;
-    const targetPath = ROUTE_PATHS[next];
-    if (window.location.pathname !== targetPath || window.location.hash) {
-      window.history.pushState({}, "", targetPath);
-    }
-    setRoute(next);
-  };
+  useLenis();
+  useReveal();
 
   return (
     <div className="min-h-screen bg-[var(--bg-canvas)] text-[var(--text-primary)]">
-      <Navbar
-        currentRoute={route}
-        onNavigate={navigateTo}
-        onOpenDemo={() => setIsDemoOpen(true)}
-      />
+      <Navbar onOpenDemo={() => setIsDemoOpen(true)} />
 
       <main>
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={route}
-            initial={{ opacity: 0, y: 6 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -4 }}
-            transition={{ duration: 0.18, ease: [0.22, 1, 0.36, 1] }}
-          >
-            {route === "home" && (
-              <>
-                <HeroTelemetry onOpenDemo={() => setIsDemoOpen(true)} />
-                <StandardsBar />
-                <SplitArchitecture />
-                <VerticalHatchDivider />
-                <SplitTraceability onOpenDemo={() => setIsDemoOpen(true)} />
-                <VerticalHatchDivider />
-                <LightChallengesSection />
-                <ContextualPrecisionCarousel onOpenDemo={() => setIsDemoOpen(true)} />
-                <VerticalHatchDivider />
-                <RegionalTelemetryMap onOpenDemo={() => setIsDemoOpen(true)} />
-              </>
-            )}
-            {route === "telemetria" && (
-              <HardwareTelemetryPage
-                onOpenDemo={() => setIsDemoOpen(true)}
-                onNavigateHome={() => navigateTo("home")}
-              />
-            )}
-            {route === "simulador" && (
-              <DemandSimulatorPage
-                onOpenDemo={() => setIsDemoOpen(true)}
-                onNavigateHome={() => navigateTo("home")}
-              />
-            )}
-            {route === "auditoria" && (
-              <EsgAuditPage
-                onOpenDemo={() => setIsDemoOpen(true)}
-                onNavigateHome={() => navigateTo("home")}
-              />
-            )}
-          </motion.div>
-        </AnimatePresence>
+        <HeroTelemetry onOpenDemo={() => setIsDemoOpen(true)} />
+        <StandardsBar />
+        <SplitArchitecture />
+        <VerticalHatchDivider />
+        <SplitTraceability onOpenDemo={() => setIsDemoOpen(true)} />
+        <VerticalHatchDivider />
+        <LightChallengesSection />
+        <ContextualPrecisionCarousel onOpenDemo={() => setIsDemoOpen(true)} />
+        <VerticalHatchDivider />
+        <RegionalTelemetryMap onOpenDemo={() => setIsDemoOpen(true)} />
       </main>
 
-      <ClosingCtaAndFooter
-        onOpenDemo={() => setIsDemoOpen(true)}
-        onNavigate={navigateTo}
-      />
+      <ClosingCtaAndFooter onOpenDemo={() => setIsDemoOpen(true)} />
       <DemoContactModal isOpen={isDemoOpen} onClose={() => setIsDemoOpen(false)} />
     </div>
   );

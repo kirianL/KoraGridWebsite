@@ -1,14 +1,12 @@
 import React, { useState } from "react";
 import { FOOTER_COLUMNS } from "../data/koragrid";
-import type { Route } from "../routing/routes";
 import { KoraGridLogo } from "./Icons";
 
 interface ClosingCtaAndFooterProps {
   onOpenDemo: () => void;
-  onNavigate?: (route: Route, sectionHash?: string) => void;
 }
 
-export const ClosingCtaAndFooter: React.FC<ClosingCtaAndFooterProps> = ({ onNavigate }) => {
+export const ClosingCtaAndFooter: React.FC<ClosingCtaAndFooterProps> = () => {
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
   const [subject, setSubject] = useState("");
@@ -274,12 +272,6 @@ export const ClosingCtaAndFooter: React.FC<ClosingCtaAndFooterProps> = ({ onNavi
                       <li key={link.label}>
                         <a
                           href={link.href}
-                          onClick={(e) => {
-                            if (onNavigate && link.href.startsWith("#")) {
-                              e.preventDefault();
-                              onNavigate("home", link.href);
-                            }
-                          }}
                           className="text-[13px] text-[var(--text-secondary)] transition-colors duration-150 hover:text-[var(--text-primary)]"
                         >
                           {link.label}
