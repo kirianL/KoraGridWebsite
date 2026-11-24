@@ -286,7 +286,14 @@ export const ClosingCtaAndFooter: React.FC<ClosingCtaAndFooterProps> = () => {
 
           <div className="mt-10 flex flex-wrap items-center justify-between gap-4 border-t border-white/[0.08] pt-6 text-[12px] text-[var(--text-muted)]">
             <span>© 2026 KoraGrid · San José, Costa Rica</span>
-            <span className="font-mono-tech">ISO 14064 · GRI · Programa País 2.0</span>
+            <a
+              href="https://kirian.dev"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="transition-colors duration-150 hover:text-[var(--text-primary)]"
+            >
+              Craft by kirian
+            </a>
           </div>
         </div>
       </div>
