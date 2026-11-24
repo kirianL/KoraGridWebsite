@@ -93,7 +93,7 @@ export const HeroTelemetry: React.FC<HeroTelemetryProps> = ({ onOpenDemo }) => {
           {/* Flush interlocking SVG spectrum bars anchored at bottom (static) */}
           <div
             aria-hidden="true"
-            className="pointer-events-none absolute inset-x-0 bottom-0 h-[215px] overflow-hidden sm:h-[255px]"
+            className="pointer-events-none absolute inset-x-0 bottom-0 h-[285px] overflow-hidden sm:h-[255px]"
           >
             <HeroSpectrumSvg />
           </div>
@@ -101,7 +101,7 @@ export const HeroTelemetry: React.FC<HeroTelemetryProps> = ({ onOpenDemo }) => {
           {/* Translucent Smoked-Glass Console Card (authentic glassmorphism matching reference) */}
           <div
             data-reveal
-            className="relative z-10 mx-auto mb-[72px] flex min-h-[156px] max-w-[650px] flex-col justify-between rounded-[8px] border border-white/[0.12] px-4 py-4 backdrop-blur-2xl sm:mb-[102px] sm:min-h-[164px] sm:px-6 sm:py-5"
+            className="relative z-10 mx-auto mb-[156px] flex min-h-[156px] max-w-[650px] flex-col justify-between rounded-[8px] border border-white/[0.12] px-4 py-4 backdrop-blur-2xl sm:mb-[102px] sm:min-h-[164px] sm:px-6 sm:py-5"
             style={{
               background:
                 "linear-gradient(180deg, rgba(36, 36, 38, 0.72) 0%, rgba(22, 22, 24, 0.56) 100%)",
