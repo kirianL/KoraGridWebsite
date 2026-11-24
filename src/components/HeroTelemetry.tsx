@@ -54,7 +54,7 @@ export const HeroTelemetry: React.FC<HeroTelemetryProps> = ({ onOpenDemo }) => {
 
   return (
     <section id="plataforma" className="bg-[var(--bg-canvas)]">
-      <div className="rail-container flex min-h-[calc(100svh-56px)] flex-col justify-between bg-[var(--bg-surface-primary)] pt-10 sm:block sm:min-h-0 sm:pt-16">
+      <div className="rail-container flex min-h-[calc(100lvh-56px-env(safe-area-inset-top))] flex-col justify-between bg-[var(--bg-surface-primary)] pt-10 sm:block sm:min-h-0 sm:pt-16">
         {/* Centered 2-line Hero Copy (exact reference proportions) */}
         <div className="mx-auto my-auto max-w-[660px] px-5 py-3 text-center sm:my-0 sm:px-8 sm:py-0">
           <h1 className="text-[31px] font-normal leading-[1.08] tracking-[-0.03em] text-[var(--text-primary)] sm:text-[50px]">
