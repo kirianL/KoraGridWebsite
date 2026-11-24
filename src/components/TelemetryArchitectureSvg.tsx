@@ -2,12 +2,15 @@ import React, { useState } from "react";
 import NumberFlow from "@number-flow/react";
 import { AnimatePresence, motion } from "motion/react";
 import { useInViewState } from "../hooks/useReveal";
+import { useLocale } from "../i18n/LocaleContext";
 
 interface IsoNode {
   id: string;
   code: string;
   label: string;
+  labelEn: string;
   metric: string;
+  metricEn: string;
   cx: number;
   cy: number;
   rx: number;
@@ -25,7 +28,9 @@ const ISO_NODES: IsoNode[] = [
     id: "grid-in",
     code: "01",
     label: "Acometida red eléctrica CR",
+    labelEn: "Costa Rica grid feed",
     metric: "13.8 kV · 60 Hz",
+    metricEn: "13.8 kV · 60 Hz",
     cx: 240,
     cy: 82,
     rx: 34,
@@ -38,7 +43,9 @@ const ISO_NODES: IsoNode[] = [
     id: "peak-guard",
     code: "02",
     label: "Control de pico punta",
+    labelEn: "Peak demand guard",
     metric: "-14.2% demanda",
+    metricEn: "-14.2% demand",
     cx: 282,
     cy: 106,
     rx: 34,
@@ -51,7 +58,9 @@ const ISO_NODES: IsoNode[] = [
     id: "substation",
     code: "03",
     label: "Subestación principal",
+    labelEn: "Main substation",
     metric: "412.8 kW activos",
+    metricEn: "412.8 kW active",
     cx: 198,
     cy: 106,
     rx: 36,
@@ -64,7 +73,9 @@ const ISO_NODES: IsoNode[] = [
     id: "chiller",
     code: "04",
     label: "Circuito chillers planta",
+    labelEn: "Plant chiller circuit",
     metric: "118.4 kW · estable",
+    metricEn: "118.4 kW · stable",
     cx: 154,
     cy: 132,
     rx: 36,
@@ -77,7 +88,9 @@ const ISO_NODES: IsoNode[] = [
     id: "cleanroom",
     code: "05",
     label: "Cuartos limpios MedTech",
+    labelEn: "MedTech cleanrooms",
     metric: "64.0 kW · 24/7",
+    metricEn: "64.0 kW · 24/7",
     cx: 110,
     cy: 158,
     rx: 38,
@@ -90,7 +103,9 @@ const ISO_NODES: IsoNode[] = [
     id: "compressors",
     code: "06",
     label: "Compresores y bombeo",
+    labelEn: "Compressors & pumping",
     metric: "86.2 kW · carga media",
+    metricEn: "86.2 kW · mid load",
     cx: 156,
     cy: 184,
     rx: 38,
@@ -103,7 +118,9 @@ const ISO_NODES: IsoNode[] = [
     id: "fuel",
     code: "07",
     label: "Sensores de combustible",
+    labelEn: "Fuel sensors",
     metric: "Alcance 1 · 0.08 tCO2e/h",
+    metricEn: "Scope 1 · 0.08 tCO2e/h",
     cx: 202,
     cy: 212,
     rx: 38,
@@ -116,7 +133,9 @@ const ISO_NODES: IsoNode[] = [
     id: "emission-factor",
     code: "08",
     label: "Factor oficial ICE / SIN",
+    labelEn: "Official ICE / SIN factor",
     metric: "0.024 tCO2e/MWh",
+    metricEn: "0.024 tCO2e/MWh",
     cx: 248,
     cy: 238,
     rx: 36,
@@ -129,7 +148,9 @@ const ISO_NODES: IsoNode[] = [
     id: "iso-ledger",
     code: "09",
     label: "Libro mayor ISO 14064",
+    labelEn: "ISO 14064 ledger",
     metric: "Evidencia auditable",
+    metricEn: "Auditable evidence",
     cx: 292,
     cy: 212,
     rx: 36,
@@ -142,7 +163,9 @@ const ISO_NODES: IsoNode[] = [
     id: "gri-report",
     code: "10",
     label: "Reporte GRI y Programa País",
+    labelEn: "GRI & Programa País report",
     metric: "Exportación EE. UU. / UE",
+    metricEn: "US / EU export",
     cx: 336,
     cy: 186,
     rx: 36,
@@ -155,7 +178,9 @@ const ISO_NODES: IsoNode[] = [
     id: "outpost",
     code: "11",
     label: "Compensación verificada CR",
+    labelEn: "Verified CR offset",
     metric: "Balance neto auditado",
+    metricEn: "Audited net balance",
     cx: 352,
     cy: 142,
     rx: 24,
@@ -178,6 +203,8 @@ const HUB_CENTER = { x: 232, y: 163 };
 export const TelemetryArchitectureSvg: React.FC<{ className?: string }> = ({
   className = "w-full max-w-[440px] h-auto",
 }) => {
+  const { locale } = useLocale();
+  const isEn = locale === "en";
   const [activeId, setActiveId] = useState<string | null>(null);
   const { ref, inView } = useInViewState<HTMLDivElement>(0.25);
   const activeNode = ISO_NODES.find((n) => n.id === activeId) ?? null;
@@ -193,7 +220,11 @@ export const TelemetryArchitectureSvg: React.FC<{ className?: string }> = ({
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
         role="img"
-        aria-label="Diagrama isométrico interactivo de nodos de telemetría energética KoraGrid"
+        aria-label={
+          isEn
+            ? "Interactive isometric diagram of KoraGrid energy telemetry nodes"
+            : "Diagrama isométrico interactivo de nodos de telemetría energética KoraGrid"
+        }
         className="h-auto w-full overflow-visible"
       >
         {/* Subtle base isometric reference diamond */}
@@ -226,13 +257,13 @@ export const TelemetryArchitectureSvg: React.FC<{ className?: string }> = ({
             >
               <path
                 d={leftWall}
-                fill={isHovered ? "#18241d" : "#161616"}
+                fill={isHovered ? "#132018" : "#161616"}
                 stroke={isHovered ? "rgba(74, 222, 128, 0.55)" : "rgba(255,255,255,0.16)"}
                 strokeWidth="0.85"
               />
               <path
                 d={rightWall}
-                fill={isHovered ? "#121c16" : "#121212"}
+                fill={isHovered ? "#0e1a14" : "#121212"}
                 stroke={isHovered ? "rgba(74, 222, 128, 0.4)" : "rgba(255,255,255,0.12)"}
                 strokeWidth="0.85"
               />
@@ -243,10 +274,10 @@ export const TelemetryArchitectureSvg: React.FC<{ className?: string }> = ({
               />
               <path
                 d={topPath}
-                fill={isHovered ? "#182842" : "#191919"}
+                fill={isHovered ? "#182818" : "#191919"}
                 stroke={
                   isHovered
-                    ? "#60a5fa"
+                    ? "#4ade80"
                     : isNeighbor
                       ? "rgba(255,255,255,0.34)"
                       : "rgba(255,255,255,0.22)"
@@ -260,7 +291,7 @@ export const TelemetryArchitectureSvg: React.FC<{ className?: string }> = ({
                   cy={node.cy}
                   rx={node.rx * 0.28}
                   ry={node.ry * 0.28}
-                  stroke={isHovered ? "#60a5fa" : "rgba(255,255,255,0.26)"}
+                  stroke={isHovered ? "#4ade80" : "rgba(255,255,255,0.26)"}
                   strokeWidth="0.85"
                 />
               )}
@@ -271,7 +302,7 @@ export const TelemetryArchitectureSvg: React.FC<{ className?: string }> = ({
                     cy={node.cy}
                     rx={node.rx * 0.34}
                     ry={node.ry * 0.34}
-                    stroke={isHovered ? "#60a5fa" : "rgba(255,255,255,0.28)"}
+                    stroke={isHovered ? "#4ade80" : "rgba(255,255,255,0.28)"}
                     strokeWidth="0.85"
                   />
                   <ellipse
@@ -279,8 +310,8 @@ export const TelemetryArchitectureSvg: React.FC<{ className?: string }> = ({
                     cy={node.cy}
                     rx={node.rx * 0.14}
                     ry={node.ry * 0.14}
-                    fill={isHovered ? "#60a5fa" : "none"}
-                    stroke={isHovered ? "#60a5fa" : "rgba(255,255,255,0.2)"}
+                    fill={isHovered ? "#4ade80" : "none"}
+                    stroke={isHovered ? "#4ade80" : "rgba(255,255,255,0.2)"}
                     strokeWidth="0.75"
                   />
                 </>
@@ -288,7 +319,7 @@ export const TelemetryArchitectureSvg: React.FC<{ className?: string }> = ({
               {node.squarePad && (
                 <path
                   d={`M ${node.cx} ${node.cy - node.ry * 0.4} L ${node.cx + node.rx * 0.4} ${node.cy} L ${node.cx} ${node.cy + node.ry * 0.4} L ${node.cx - node.rx * 0.4} ${node.cy} Z`}
-                  stroke={isHovered ? "#60a5fa" : "rgba(255,255,255,0.22)"}
+                  stroke={isHovered ? "#4ade80" : "rgba(255,255,255,0.22)"}
                   strokeWidth="0.75"
                 />
               )}
@@ -306,7 +337,7 @@ export const TelemetryArchitectureSvg: React.FC<{ className?: string }> = ({
         >
           <path
             d="M168 156 L220 126 L296 170 L244 200 Z"
-            fill={activeId ? "#1a231e" : "#1b1b1b"}
+            fill={activeId ? "#152218" : "#1b1b1b"}
             stroke={activeId ? "rgba(74, 222, 128, 0.48)" : "rgba(255,255,255,0.26)"}
             strokeWidth="0.95"
           />
@@ -331,7 +362,7 @@ export const TelemetryArchitectureSvg: React.FC<{ className?: string }> = ({
             cx={HUB_CENTER.x}
             cy={HUB_CENTER.y}
             r="2.2"
-            fill={activeId ? "#60a5fa" : "rgba(255,255,255,0.35)"}
+            fill={activeId ? "#4ade80" : "rgba(255,255,255,0.35)"}
           />
         </g>
 
@@ -359,13 +390,13 @@ export const TelemetryArchitectureSvg: React.FC<{ className?: string }> = ({
             >
               <path
                 d={leftWall}
-                fill={isHovered ? "#18241d" : "#161616"}
+                fill={isHovered ? "#132018" : "#161616"}
                 stroke={isHovered ? "rgba(74, 222, 128, 0.55)" : "rgba(255,255,255,0.16)"}
                 strokeWidth="0.85"
               />
               <path
                 d={rightWall}
-                fill={isHovered ? "#121c16" : "#121212"}
+                fill={isHovered ? "#0e1a14" : "#121212"}
                 stroke={isHovered ? "rgba(74, 222, 128, 0.4)" : "rgba(255,255,255,0.12)"}
                 strokeWidth="0.85"
               />
@@ -376,10 +407,10 @@ export const TelemetryArchitectureSvg: React.FC<{ className?: string }> = ({
               />
               <path
                 d={topPath}
-                fill={isHovered ? "#182842" : "#191919"}
+                fill={isHovered ? "#182818" : "#191919"}
                 stroke={
                   isHovered
-                    ? "#60a5fa"
+                    ? "#4ade80"
                     : isNeighbor
                       ? "rgba(255,255,255,0.34)"
                       : "rgba(255,255,255,0.22)"
@@ -393,7 +424,7 @@ export const TelemetryArchitectureSvg: React.FC<{ className?: string }> = ({
                   cy={node.cy}
                   rx={node.rx * 0.28}
                   ry={node.ry * 0.28}
-                  stroke={isHovered ? "#60a5fa" : "rgba(255,255,255,0.26)"}
+                  stroke={isHovered ? "#4ade80" : "rgba(255,255,255,0.26)"}
                   strokeWidth="0.85"
                 />
               )}
@@ -404,7 +435,7 @@ export const TelemetryArchitectureSvg: React.FC<{ className?: string }> = ({
                     cy={node.cy}
                     rx={node.rx * 0.34}
                     ry={node.ry * 0.34}
-                    stroke={isHovered ? "#60a5fa" : "rgba(255,255,255,0.28)"}
+                    stroke={isHovered ? "#4ade80" : "rgba(255,255,255,0.28)"}
                     strokeWidth="0.85"
                   />
                   <ellipse
@@ -412,8 +443,8 @@ export const TelemetryArchitectureSvg: React.FC<{ className?: string }> = ({
                     cy={node.cy}
                     rx={node.rx * 0.14}
                     ry={node.ry * 0.14}
-                    fill={isHovered ? "#60a5fa" : "none"}
-                    stroke={isHovered ? "#60a5fa" : "rgba(255,255,255,0.2)"}
+                    fill={isHovered ? "#4ade80" : "none"}
+                    stroke={isHovered ? "#4ade80" : "rgba(255,255,255,0.2)"}
                     strokeWidth="0.75"
                   />
                 </>
@@ -421,7 +452,7 @@ export const TelemetryArchitectureSvg: React.FC<{ className?: string }> = ({
               {node.squarePad && (
                 <path
                   d={`M ${node.cx} ${node.cy - node.ry * 0.4} L ${node.cx + node.rx * 0.4} ${node.cy} L ${node.cx} ${node.cy + node.ry * 0.4} L ${node.cx - node.rx * 0.4} ${node.cy} Z`}
-                  stroke={isHovered ? "#60a5fa" : "rgba(255,255,255,0.22)"}
+                  stroke={isHovered ? "#4ade80" : "rgba(255,255,255,0.22)"}
                   strokeWidth="0.75"
                 />
               )}
@@ -437,18 +468,18 @@ export const TelemetryArchitectureSvg: React.FC<{ className?: string }> = ({
               y1={activeNode.cy - 10}
               x2={HUB_CENTER.x}
               y2={HUB_CENTER.y - 2}
-              stroke="#60a5fa"
+              stroke="#4ade80"
               strokeWidth="1"
               strokeDasharray="3 3"
               opacity="0.85"
             />
-            <circle cx={activeNode.cx} cy={activeNode.cy - 10} r="2.5" fill="#60a5fa" />
+            <circle cx={activeNode.cx} cy={activeNode.cy - 10} r="2.5" fill="#4ade80" />
           </g>
         )}
       </svg>
 
       {/* Minimal fixed-height technical telemetry readout strip with animated text swap + NumberFlow */}
-      <div className="mt-2 h-6 overflow-hidden border-t border-white/[0.06] pt-2 font-mono-tech text-[11px] tabular-nums">
+      <div className="mt-2 min-h-[28px] border-t border-white/[0.06] pt-2 font-mono-tech text-[11px] tabular-nums">
         <AnimatePresence mode="wait">
           {activeNode ? (
             <motion.div
@@ -460,9 +491,12 @@ export const TelemetryArchitectureSvg: React.FC<{ className?: string }> = ({
               className="flex items-center justify-between"
             >
               <span className="truncate pr-2 text-[#e4e4e7]">
-                <span className="text-[#60a5fa]">[{activeNode.code}]</span> {activeNode.label}
+                <span className="text-[#4ade80]">[{activeNode.code}]</span>{" "}
+                {isEn ? activeNode.labelEn : activeNode.label}
               </span>
-              <span className="shrink-0 text-[#60a5fa]">{activeNode.metric}</span>
+              <span className="shrink-0 text-[#4ade80]">
+                {isEn ? activeNode.metricEn : activeNode.metric}
+              </span>
             </motion.div>
           ) : (
             <motion.div
@@ -473,7 +507,9 @@ export const TelemetryArchitectureSvg: React.FC<{ className?: string }> = ({
               transition={{ duration: 0.16, ease: [0.22, 1, 0.36, 1] }}
               className="flex items-center justify-between"
             >
-              <span className="text-[#71717a]">[00] Arquitectura modular KoraGrid</span>
+              <span className="text-[#71717a]">
+                {isEn ? "[00] KoraGrid modular architecture" : "[00] Arquitectura modular KoraGrid"}
+              </span>
               <span className="text-[#71717a]">
                 <NumberFlow
                   value={inView ? 11 : 1}
@@ -481,7 +517,7 @@ export const TelemetryArchitectureSvg: React.FC<{ className?: string }> = ({
                   trend={1}
                   className="nf-number"
                 />{" "}
-                nodos activos
+                {isEn ? "active nodes" : "nodos activos"}
               </span>
             </motion.div>
           )}
@@ -491,9 +527,9 @@ export const TelemetryArchitectureSvg: React.FC<{ className?: string }> = ({
       {/* Mobile-only quick tap chips for thumb exploration (since mobile has no hover) */}
       <div className="mt-3 grid grid-cols-2 gap-1.5 sm:hidden">
         {[
-          { id: "substation", label: "Subestación" },
+          { id: "substation", label: isEn ? "Substation" : "Subestación" },
           { id: "chiller", label: "Chillers" },
-          { id: "cleanroom", label: "Cuartos limpios" },
+          { id: "cleanroom", label: isEn ? "Cleanrooms" : "Cuartos limpios" },
           { id: "iso-ledger", label: "ISO 14064" },
         ].map((chip) => {
           const isSelected = activeId === chip.id;
@@ -505,7 +541,7 @@ export const TelemetryArchitectureSvg: React.FC<{ className?: string }> = ({
               aria-pressed={isSelected}
               className={`rounded-[6px] border px-2.5 py-1.5 text-left font-mono-tech text-[11px] transition-colors duration-150 ${
                 isSelected
-                  ? "border-[#60a5fa]/60 bg-[#182842] text-[#60a5fa]"
+                  ? "border-[#4ade80]/60 bg-[#182818] text-[#4ade80]"
                   : "border-white/10 bg-[#191919] text-[#a1a1aa]"
               }`}
             >

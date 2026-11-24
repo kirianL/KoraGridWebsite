@@ -1,77 +1,29 @@
 import React, { useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
+import { TRACEABILITY_BY_LOCALE } from "../data/koragrid";
+import { useLocale } from "../i18n/LocaleContext";
 import { PulseWaveIcon } from "./Icons";
 
 interface SplitTraceabilityProps {
   onOpenDemo: () => void;
 }
 
-interface InlineSentenceStep {
-  id: number;
-  beforeBadge: string;
-  afterBadge: string;
-  tag: string;
-  cardText: string;
-}
-
-const TRACEABILITY_SENTENCES: InlineSentenceStep[] = [
-  {
-    id: 1,
-    beforeBadge: "Mide cada circuito al",
-    afterBadge: "minuto.",
-    tag: "minuto",
-    cardText:
-      "Lectura directa cada 60 s en subestaciones, chillers y tableros críticos sin digitación manual.",
-  },
-  {
-    id: 2,
-    beforeBadge: "Detecta cualquier",
-    afterBadge: "pico de demanda.",
-    tag: "demanda",
-    cardText:
-      "Alertas preventivas en ventanas de 15 minutos antes de activar penalizaciones por horario punta.",
-  },
-  {
-    id: 3,
-    beforeBadge: "Calcula tu",
-    afterBadge: "huella de carbono.",
-    tag: "emisiones",
-    cardText:
-      "Conversión automática de kWh y combustible a tCO2e con factores oficiales actualizados de Costa Rica.",
-  },
-  {
-    id: 4,
-    beforeBadge: "Genera evidencia para",
-    afterBadge: "ISO 14064 y GRI.",
-    tag: "auditoría",
-    cardText:
-      "Respaldos auditables listos para Programa País Carbono Neutralidad 2.0, Bandera Azul y exportación.",
-  },
-  {
-    id: 5,
-    beforeBadge: "Y vincula cada",
-    afterBadge: "compensación local.",
-    tag: "Costa Rica",
-    cardText:
-      "Trazabilidad directa entre reducciones en planta y proyectos ambientales verificados en el país.",
-  },
-];
-
 export const SplitTraceability: React.FC<SplitTraceabilityProps> = ({ onOpenDemo }) => {
+  const { locale } = useLocale();
+  const copy = TRACEABILITY_BY_LOCALE[locale];
   const [activeStep, setActiveStep] = useState(0);
-  const current = TRACEABILITY_SENTENCES[activeStep];
+  const current = copy.steps[activeStep] ?? copy.steps[0];
 
   return (
     <section id="trazabilidad" className="bg-[var(--bg-canvas)]">
       <div className="rail-container grid grid-cols-1 bg-[var(--bg-surface-primary)] lg:grid-cols-12">
-        {/* Left Column (~38%): Continuous natural prose with inline [1]..[5] badges on all viewports */}
         <div className="flex flex-col justify-start border-b border-[var(--border-subtle)] px-5 py-10 sm:p-10 lg:col-span-5 lg:border-r lg:border-b-0 lg:p-12">
           <h2
             data-reveal
             style={{ "--reveal-delay": "0ms" } as React.CSSProperties}
             className="text-[28px] font-normal leading-[1.12] tracking-[-0.025em] text-[var(--text-primary)] sm:text-[38px]"
           >
-            Precisión verificable en cada circuito
+            {copy.title}
           </h2>
 
           <p
@@ -79,7 +31,7 @@ export const SplitTraceability: React.FC<SplitTraceabilityProps> = ({ onOpenDemo
             style={{ "--reveal-delay": "80ms" } as React.CSSProperties}
             className="mt-5 text-[17px] font-normal leading-[1.52] tracking-[-0.01em] sm:mt-7 sm:text-[21px] sm:leading-[1.48]"
           >
-            {TRACEABILITY_SENTENCES.map((step, idx) => {
+            {copy.steps.map((step, idx) => {
               const isSelected = idx === activeStep;
               return (
                 <React.Fragment key={step.id}>
@@ -111,7 +63,6 @@ export const SplitTraceability: React.FC<SplitTraceabilityProps> = ({ onOpenDemo
           </p>
         </div>
 
-        {/* Right Column (~62%): Flush full-bleed green gradient card */}
         <div
           data-reveal
           style={{ "--reveal-delay": "140ms" } as React.CSSProperties}
@@ -119,7 +70,7 @@ export const SplitTraceability: React.FC<SplitTraceabilityProps> = ({ onOpenDemo
         >
           <img
             src="/images/split-emerald-field.webp"
-            alt="Campo cromático azul cobalto de telemetría KoraGrid"
+            alt={copy.imageAlt}
             width={1024}
             height={1024}
             loading="lazy"
@@ -127,11 +78,10 @@ export const SplitTraceability: React.FC<SplitTraceabilityProps> = ({ onOpenDemo
             className="pointer-events-none absolute inset-0 h-full w-full object-cover select-none"
           />
 
-          {/* Centered editorial telemetry quote with smooth motion reveal */}
           <div className="relative z-10 m-auto flex min-h-[140px] max-w-[460px] items-center justify-center px-2 text-center sm:px-4">
             <AnimatePresence mode="wait">
               <motion.p
-                key={current.id}
+                key={`${locale}-${current.id}`}
                 initial={{ opacity: 0, y: 8, filter: "blur(3px)" }}
                 animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
                 exit={{ opacity: 0, y: -8, filter: "blur(3px)" }}
@@ -146,21 +96,20 @@ export const SplitTraceability: React.FC<SplitTraceabilityProps> = ({ onOpenDemo
             </AnimatePresence>
           </div>
 
-          {/* Bottom controls flush inside corners (exact Image 2) */}
           <div className="relative z-10 flex items-center justify-between">
             <button
               type="button"
               onClick={onOpenDemo}
               className="rounded-[6px] bg-[#ffffff] px-4 py-1.5 text-[12px] font-semibold text-[#111111] shadow-sm transition-colors duration-150 hover:bg-[#e5e7eb] cursor-pointer"
             >
-              Solicitar demo
+              {copy.cta}
             </button>
 
             <button
               type="button"
-              aria-label="Siguiente indicador de telemetría"
+              aria-label={copy.nextAria}
               onClick={() =>
-                setActiveStep((prev) => (prev + 1) % TRACEABILITY_SENTENCES.length)
+                setActiveStep((prev) => (prev + 1) % copy.steps.length)
               }
               className="inline-flex h-9 w-9 items-center justify-center rounded-[6px] bg-black/30 text-white backdrop-blur-sm transition-colors duration-150 hover:bg-black/45 cursor-pointer"
             >

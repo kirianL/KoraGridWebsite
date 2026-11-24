@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { FOOTER_COLUMNS } from "../data/koragrid";
+import { FOOTER_COLUMNS_BY_LOCALE } from "../data/koragrid";
+import { useLocale } from "../i18n/LocaleContext";
 import { KoraGridLogo } from "./Icons";
 
 interface ClosingCtaAndFooterProps {
@@ -7,6 +8,8 @@ interface ClosingCtaAndFooterProps {
 }
 
 export const ClosingCtaAndFooter: React.FC<ClosingCtaAndFooterProps> = () => {
+  const { locale, isEn } = useLocale();
+  const footerColumns = FOOTER_COLUMNS_BY_LOCALE[locale];
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
   const [subject, setSubject] = useState("");
@@ -95,33 +98,36 @@ export const ClosingCtaAndFooter: React.FC<ClosingCtaAndFooterProps> = () => {
                   style={{ "--reveal-delay": "0ms" } as React.CSSProperties}
                   className="text-[13px] font-medium text-white/75"
                 >
-                  Contacto
+                  {isEn ? "Contact" : "Contacto"}
                 </p>
                 <h2
                   data-reveal
                   style={{ "--reveal-delay": "60ms" } as React.CSSProperties}
                   className="mt-2.5 text-[30px] font-semibold leading-[1.08] tracking-[-0.025em] text-white sm:text-[40px]"
                 >
-                  ¿Interesado en nuestra plataforma?
+                  {isEn ? "Interested in our platform?" : "¿Interesado en nuestra plataforma?"}
                 </h2>
                 <p
                   data-reveal
                   style={{ "--reveal-delay": "120ms" } as React.CSSProperties}
                   className="mt-5 max-w-[360px] text-[13.5px] leading-[1.6] text-white/85"
                 >
-                  Escríbenos para conocer cómo conectar medidores eléctricos inteligentes y automatizar tus reportes ESG en tiempo real.
+                  {isEn
+                    ? "Write to us to learn how to connect smart electrical meters and automate your ESG reporting in real time."
+                    : "Escríbenos para conocer cómo conectar medidores eléctricos inteligentes y automatizar tus reportes ESG en tiempo real."}
                 </p>
                 <p
                   data-reveal
                   style={{ "--reveal-delay": "170ms" } as React.CSSProperties}
                   className="mt-4 max-w-[360px] text-[13.5px] leading-[1.6] text-white/75"
                 >
-                  Acompañamos despliegues técnicos en zonas francas, hotelería, agroindustria y centros logísticos en Costa Rica y Centroamérica.
+                  {isEn
+                    ? "We support technical deployments across Free Trade Zones, hospitality, agribusiness, and logistics hubs in Costa Rica and Central America."
+                    : "Acompañamos despliegues técnicos en zonas francas, hotelería, agroindustria y centros logísticos en Costa Rica y Centroamérica."}
                 </p>
               </div>
             </div>
 
-            {/* Right Minimalist Underline-Only Form (exact reference field structure) */}
             <div
               data-reveal
               style={{ "--reveal-delay": "120ms" } as React.CSSProperties}
@@ -133,10 +139,12 @@ export const ClosingCtaAndFooter: React.FC<ClosingCtaAndFooterProps> = () => {
                   className="flex h-full flex-col justify-center rounded-[8px] border border-white/20 bg-black/20 p-6 backdrop-blur-sm"
                 >
                   <p className="text-[18px] font-medium text-white">
-                    Mensaje recibido, {fullName}
+                    {isEn ? `Message received, ${fullName}` : `Mensaje recibido, ${fullName}`}
                   </p>
                   <p className="mt-2 text-[14px] leading-[1.6] text-white/80">
-                    Nuestro equipo de ingeniería en Costa Rica revisará tu consulta y responderá a {email}.
+                    {isEn
+                      ? `Our engineering team in Costa Rica will review your request and reply to ${email}.`
+                      : `Nuestro equipo de ingeniería en Costa Rica revisará tu consulta y responderá a ${email}.`}
                   </p>
                   <div className="mt-6">
                     <button
@@ -150,7 +158,7 @@ export const ClosingCtaAndFooter: React.FC<ClosingCtaAndFooterProps> = () => {
                       }}
                       className="rounded-[6px] bg-white px-4 py-2 text-[12.5px] font-semibold text-[#0c1e4a] transition-colors duration-150 hover:bg-white/90 cursor-pointer"
                     >
-                      Enviar otra consulta
+                      {isEn ? "Send another inquiry" : "Enviar otra consulta"}
                     </button>
                   </div>
                 </div>
@@ -161,7 +169,7 @@ export const ClosingCtaAndFooter: React.FC<ClosingCtaAndFooterProps> = () => {
                       htmlFor="footer-name"
                       className="block text-[12.5px] font-medium text-white/90"
                     >
-                      Nombre completo
+                      {isEn ? "Full name" : "Nombre completo"}
                     </label>
                     <input
                       id="footer-name"
@@ -169,7 +177,7 @@ export const ClosingCtaAndFooter: React.FC<ClosingCtaAndFooterProps> = () => {
                       required
                       value={fullName}
                       onChange={(e) => setFullName(e.target.value)}
-                      placeholder="Ingresa tu nombre completo"
+                      placeholder={isEn ? "Enter your full name" : "Ingresa tu nombre completo"}
                       className="mt-2 w-full border-b border-white/35 bg-transparent pb-2.5 text-[16px] text-white placeholder:text-white/50 focus:border-white focus:outline-none sm:text-[14px]"
                     />
                   </div>
@@ -180,7 +188,7 @@ export const ClosingCtaAndFooter: React.FC<ClosingCtaAndFooterProps> = () => {
                         htmlFor="footer-email"
                         className="block text-[12.5px] font-medium text-white/90"
                       >
-                        Correo electrónico
+                        {isEn ? "Work email" : "Correo electrónico"}
                       </label>
                       <input
                         id="footer-email"
@@ -188,7 +196,7 @@ export const ClosingCtaAndFooter: React.FC<ClosingCtaAndFooterProps> = () => {
                         required
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
-                        placeholder="Ingresa tu correo corporativo"
+                        placeholder={isEn ? "Enter your work email" : "Ingresa tu correo corporativo"}
                         className="mt-2 w-full border-b border-white/35 bg-transparent pb-2.5 text-[16px] text-white placeholder:text-white/50 focus:border-white focus:outline-none sm:text-[14px]"
                       />
                     </div>
@@ -198,14 +206,14 @@ export const ClosingCtaAndFooter: React.FC<ClosingCtaAndFooterProps> = () => {
                         htmlFor="footer-subject"
                         className="block text-[12.5px] font-medium text-white/90"
                       >
-                        Asunto
+                        {isEn ? "Subject" : "Asunto"}
                       </label>
                       <input
                         id="footer-subject"
                         type="text"
                         value={subject}
                         onChange={(e) => setSubject(e.target.value)}
-                        placeholder="Ej. Telemetría planta o ISO 14064"
+                        placeholder={isEn ? "e.g. Plant telemetry or ISO 14064" : "Ej. Telemetría planta o ISO 14064"}
                         className="mt-2 w-full border-b border-white/35 bg-transparent pb-2.5 text-[16px] text-white placeholder:text-white/50 focus:border-white focus:outline-none sm:text-[14px]"
                       />
                     </div>
@@ -216,14 +224,18 @@ export const ClosingCtaAndFooter: React.FC<ClosingCtaAndFooterProps> = () => {
                       htmlFor="footer-message"
                       className="block text-[12.5px] font-medium text-white/90"
                     >
-                      Mensaje
+                      {isEn ? "Message" : "Mensaje"}
                     </label>
                     <textarea
                       id="footer-message"
                       rows={3}
                       value={message}
                       onChange={(e) => setMessage(e.target.value)}
-                      placeholder="Cuéntanos sobre tu operación, cantidad de medidores o estándar requerido"
+                      placeholder={
+                        isEn
+                          ? "Tell us about your operation, meter count, or target standard"
+                          : "Cuéntanos sobre tu operación, cantidad de medidores o estándar requerido"
+                      }
                       className="mt-2 w-full resize-none border-b border-white/35 bg-transparent pb-2.5 text-[16px] text-white placeholder:text-white/50 focus:border-white focus:outline-none sm:text-[14px]"
                     />
                   </div>
@@ -233,7 +245,7 @@ export const ClosingCtaAndFooter: React.FC<ClosingCtaAndFooterProps> = () => {
                       type="submit"
                       className="w-full rounded-[6px] bg-white px-5 py-2.5 text-[13px] font-semibold text-[#0c1e4a] transition-colors duration-150 hover:bg-white/90 sm:w-auto cursor-pointer"
                     >
-                      Enviar mensaje
+                      {isEn ? "Send message" : "Enviar mensaje"}
                     </button>
                   </div>
                 </form>
@@ -243,7 +255,6 @@ export const ClosingCtaAndFooter: React.FC<ClosingCtaAndFooterProps> = () => {
         </div>
       </div>
 
-      {/* Solid Deep Black Architectural Footer Base (flush directly under rounded card) */}
       <div className="bg-[#090a0a]">
         <div className="rail-container border-t border-white/[0.08] px-5 py-10 sm:px-10 sm:py-12 lg:px-12">
           <div className="grid grid-cols-1 gap-9 md:grid-cols-12">
@@ -253,12 +264,14 @@ export const ClosingCtaAndFooter: React.FC<ClosingCtaAndFooterProps> = () => {
                 <span className="text-[16px] font-semibold tracking-tight">KoraGrid</span>
               </div>
               <p className="mt-3 max-w-[300px] text-[13px] leading-[1.6] text-[var(--text-muted)]">
-                Telemetría energética y gestión ESG desarrollada en Costa Rica para operaciones industriales en Centroamérica.
+                {isEn
+                  ? "Energy telemetry and ESG management built in Costa Rica for industrial operations across Central America."
+                  : "Telemetría energética y gestión ESG desarrollada en Costa Rica para operaciones industriales en Centroamérica."}
               </p>
             </div>
 
             <div className="grid grid-cols-2 gap-8 sm:grid-cols-3 md:col-span-7">
-              {FOOTER_COLUMNS.map((col, idx) => (
+              {footerColumns.map((col, idx) => (
                 <div
                   key={col.heading}
                   data-reveal

@@ -1,4 +1,5 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
+import { useLocale } from "../i18n/LocaleContext";
 import { CloseIcon } from "./Icons";
 
 interface DemoContactModalProps {
@@ -7,6 +8,7 @@ interface DemoContactModalProps {
 }
 
 export const DemoContactModal: React.FC<DemoContactModalProps> = ({ isOpen, onClose }) => {
+  const { isEn } = useLocale();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [company, setCompany] = useState("");
@@ -60,13 +62,13 @@ export const DemoContactModal: React.FC<DemoContactModalProps> = ({ isOpen, onCl
               id="demo-modal-title"
               className="mt-1 text-[20px] font-semibold tracking-tight text-[var(--text-primary)]"
             >
-              Solicitar evaluación técnica
+              {isEn ? "Request technical assessment" : "Solicitar evaluación técnica"}
             </h2>
           </div>
           <button
             type="button"
             onClick={handleResetAndClose}
-            aria-label="Cerrar ventana"
+            aria-label={isEn ? "Close modal" : "Cerrar ventana"}
             className="flex h-8 w-8 items-center justify-center rounded-md border border-[var(--border-subtle)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] cursor-pointer"
           >
             <CloseIcon className="h-4 w-4" />
@@ -76,24 +78,26 @@ export const DemoContactModal: React.FC<DemoContactModalProps> = ({ isOpen, onCl
         {submitted ? (
           <div role="status" className="py-6">
             <p className="text-[16px] font-medium text-[var(--accent-mint)]">
-              Solicitud registrada para {company}
+              {isEn ? `Request logged for ${company}` : `Solicitud registrada para ${company}`}
             </p>
             <p className="mt-2 text-[14px] leading-[1.6] text-[var(--text-secondary)]">
-              Un especialista de ingeniería de KoraGrid revisará sus requerimientos de {standard} y se comunicará al correo {email}.
+              {isEn
+                ? `A KoraGrid engineering specialist will review your ${standard} requirements and reach out to ${email}.`
+                : `Un especialista de ingeniería de KoraGrid revisará sus requerimientos de ${standard} y se comunicará al correo ${email}.`}
             </p>
             <button
               type="button"
               onClick={handleResetAndClose}
               className="mt-6 rounded-[6px] bg-[#f5f7f6] px-5 py-2 text-[13px] font-semibold text-[#0d0e0e] cursor-pointer"
             >
-              Volver a la página
+              {isEn ? "Back to page" : "Volver a la página"}
             </button>
           </div>
         ) : (
           <form onSubmit={handleSubmit} className="mt-5 space-y-4">
             <div>
               <label htmlFor="kg-name" className="block text-[13px] font-medium text-[var(--text-secondary)]">
-                Nombre completo
+                {isEn ? "Full name" : "Nombre completo"}
               </label>
               <input
                 ref={nameInputRef}
@@ -102,7 +106,7 @@ export const DemoContactModal: React.FC<DemoContactModalProps> = ({ isOpen, onCl
                 required
                 value={name}
                 onChange={(e) => setName(e.target.value)}
-                placeholder="Ej. Laura Méndez"
+                placeholder={isEn ? "e.g. Laura Méndez" : "Ej. Laura Méndez"}
                 className="mt-1.5 w-full rounded-[var(--radius-md)] border border-[var(--border-subtle)] bg-[#0d0e0e] px-3.5 py-2.5 text-[16px] text-[var(--text-primary)] placeholder:text-[var(--text-muted)] focus:border-[var(--accent-emerald)] focus:outline-none sm:text-[14px]"
               />
             </div>
@@ -110,7 +114,7 @@ export const DemoContactModal: React.FC<DemoContactModalProps> = ({ isOpen, onCl
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
               <div>
                 <label htmlFor="kg-email" className="block text-[13px] font-medium text-[var(--text-secondary)]">
-                  Correo corporativo
+                  {isEn ? "Work email" : "Correo corporativo"}
                 </label>
                 <input
                   id="kg-email"
@@ -118,14 +122,14 @@ export const DemoContactModal: React.FC<DemoContactModalProps> = ({ isOpen, onCl
                   required
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  placeholder="ingenieria@empresa.cr"
+                  placeholder={isEn ? "engineering@company.cr" : "ingenieria@empresa.cr"}
                   className="mt-1.5 w-full rounded-[var(--radius-md)] border border-[var(--border-subtle)] bg-[#0d0e0e] px-3.5 py-2.5 text-[16px] text-[var(--text-primary)] placeholder:text-[var(--text-muted)] focus:border-[var(--accent-emerald)] focus:outline-none sm:text-[14px]"
                 />
               </div>
 
               <div>
                 <label htmlFor="kg-company" className="block text-[13px] font-medium text-[var(--text-secondary)]">
-                  Organización
+                  {isEn ? "Organization" : "Organización"}
                 </label>
                 <input
                   id="kg-company"
@@ -133,7 +137,7 @@ export const DemoContactModal: React.FC<DemoContactModalProps> = ({ isOpen, onCl
                   required
                   value={company}
                   onChange={(e) => setCompany(e.target.value)}
-                  placeholder="Nombre de planta u hotel"
+                  placeholder={isEn ? "Plant or hotel name" : "Nombre de planta u hotel"}
                   className="mt-1.5 w-full rounded-[var(--radius-md)] border border-[var(--border-subtle)] bg-[#0d0e0e] px-3.5 py-2.5 text-[16px] text-[var(--text-primary)] placeholder:text-[var(--text-muted)] focus:border-[var(--accent-emerald)] focus:outline-none sm:text-[14px]"
                 />
               </div>
@@ -142,7 +146,7 @@ export const DemoContactModal: React.FC<DemoContactModalProps> = ({ isOpen, onCl
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
               <div>
                 <label htmlFor="kg-standard" className="block text-[13px] font-medium text-[var(--text-secondary)]">
-                  Estándar prioritario
+                  {isEn ? "Priority standard" : "Estándar prioritario"}
                 </label>
                 <select
                   id="kg-standard"
@@ -159,7 +163,7 @@ export const DemoContactModal: React.FC<DemoContactModalProps> = ({ isOpen, onCl
 
               <div>
                 <label htmlFor="kg-meters" className="block text-[13px] font-medium text-[var(--text-secondary)]">
-                  Volumen de medidores
+                  {isEn ? "Meter volume" : "Volumen de medidores"}
                 </label>
                 <select
                   id="kg-meters"
@@ -167,9 +171,9 @@ export const DemoContactModal: React.FC<DemoContactModalProps> = ({ isOpen, onCl
                   onChange={(e) => setMeters(e.target.value)}
                   className="mt-1.5 w-full rounded-[var(--radius-md)] border border-[var(--border-subtle)] bg-[#0d0e0e] px-3 py-2.5 text-[16px] text-[var(--text-primary)] focus:border-[var(--accent-emerald)] focus:outline-none sm:text-[14px]"
                 >
-                  <option value="1 - 10 medidores">1 - 10 medidores</option>
-                  <option value="10 - 50 medidores">10 - 50 medidores</option>
-                  <option value="50+ medidores multisite">50+ medidores multisite</option>
+                  <option value="1 - 10 medidores">{isEn ? "1 - 10 meters" : "1 - 10 medidores"}</option>
+                  <option value="10 - 50 medidores">{isEn ? "10 - 50 meters" : "10 - 50 medidores"}</option>
+                  <option value="50+ medidores multisite">{isEn ? "50+ multisite meters" : "50+ medidores multisite"}</option>
                 </select>
               </div>
             </div>
@@ -180,13 +184,13 @@ export const DemoContactModal: React.FC<DemoContactModalProps> = ({ isOpen, onCl
                 onClick={handleResetAndClose}
                 className="rounded-[6px] border border-[var(--border-subtle)] px-4 py-2 text-[13px] font-medium text-[var(--text-secondary)] hover:text-[var(--text-primary)] cursor-pointer"
               >
-                Cancelar
+                {isEn ? "Cancel" : "Cancelar"}
               </button>
               <button
                 type="submit"
                 className="rounded-[6px] bg-[#f5f7f6] px-5 py-2 text-[13px] font-semibold text-[#0d0e0e] transition-colors duration-150 hover:bg-[#e2e8e5] cursor-pointer"
               >
-                Enviar solicitud
+                {isEn ? "Submit request" : "Enviar solicitud"}
               </button>
             </div>
           </form>

@@ -45,21 +45,16 @@ export function useReveal(key?: unknown): void {
 
     const observer = new IntersectionObserver(
       (entries) => {
-        const currentVh = window.innerHeight || 900;
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             entry.target.setAttribute("data-revealed", "true");
-          } else {
-            const { top, bottom } = entry.boundingClientRect;
-            if (top > currentVh || bottom < 0) {
-              entry.target.setAttribute("data-revealed", "false");
-            }
+            observer.unobserve(entry.target);
           }
         });
       },
       {
-        threshold: 0.12,
-        rootMargin: "0px 0px -48px 0px",
+        threshold: 0.08,
+        rootMargin: "0px 0px -32px 0px",
       }
     );
 

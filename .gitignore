@@ -9,6 +9,10 @@ build/
 *.log
 .opencode/
 docs/design/captures/
+docs/design/captures-en/
+twitter-captures/
+twitter-captures-en/
+twitter-captures-es/
 docs/design/model-fallback-log.md
 docs/design/session-checkpoint.json
 docs/design/quality-gate*.json

@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import NumberFlow from "@number-flow/react";
 import { AnimatePresence, motion } from "motion/react";
-import { HERO_DATA, TELEMETRY_SECTORS } from "../data/koragrid";
+import { HERO_BY_LOCALE } from "../data/koragrid";
+import { useLocale } from "../i18n/LocaleContext";
 import { useInViewState } from "../hooks/useReveal";
 import { HeroSpectrumSvg } from "./HeroSpectrumSvg";
 import { GlobeIcon, PauseIcon, PlayIcon, SectorChipIcon } from "./Icons";
@@ -24,27 +25,14 @@ const TuneSparkIcon: React.FC<{ className?: string }> = ({ className = "h-3.5 w-
   </svg>
 );
 
-const CONSOLE_SECTORS: Record<string, { prefix: string; suffix: string }> = {
-  "zonas-francas": {
-    prefix: "Planta Alajuela en línea:",
-    suffix: "sin picos de demanda.",
-  },
-  hoteleria: {
-    prefix: "Complejo Guanacaste:",
-    suffix: "con alerta punta preventiva.",
-  },
-  agroindustria: {
-    prefix: "Empacadora Zona Norte:",
-    suffix: "auditados bajo ISO 14064.",
-  },
-};
-
 export const HeroTelemetry: React.FC<HeroTelemetryProps> = ({ onOpenDemo }) => {
+  const { locale } = useLocale();
+  const hero = HERO_BY_LOCALE[locale];
   const [activeIndex, setActiveIndex] = useState(0);
   const [isSimulating, setIsSimulating] = useState(false);
   const [pulseTick, setPulseTick] = useState(0);
 
-  const sector = TELEMETRY_SECTORS[activeIndex];
+  const sector = hero.sectors[activeIndex] ?? hero.sectors[0];
 
   useEffect(() => {
     if (!isSimulating) return;
@@ -64,26 +52,23 @@ export const HeroTelemetry: React.FC<HeroTelemetryProps> = ({ onOpenDemo }) => {
     ? currentKw
     : Number((currentKw * 0.88).toFixed(1));
 
-  const consoleConfig = CONSOLE_SECTORS[sector.id] ?? CONSOLE_SECTORS["zonas-francas"];
-
   return (
     <section id="plataforma" className="hero-viewport-mobile flex flex-col bg-[var(--bg-canvas)]">
       <div className="hero-viewport-mobile rail-container flex flex-1 flex-col justify-between bg-[var(--bg-surface-primary)] pt-8 pb-0 sm:block sm:min-h-0 sm:pt-16">
-        {/* Centered 2-line Hero Copy with staggered scroll reveal */}
         <div className="mx-auto my-auto max-w-[660px] px-5 py-3 text-center sm:my-0 sm:px-8 sm:py-0">
           <h1
             data-reveal
             style={{ "--reveal-delay": "0ms" } as React.CSSProperties}
-            className="text-[31px] font-normal leading-[1.08] tracking-[-0.03em] text-[var(--text-primary)] sm:text-[50px]"
+            className="text-[31px] font-normal leading-[1.08] tracking-[-0.03em] text-[var(--text-primary)] sm:text-[50px] font-[family-name:var(--font-heading)]"
           >
-            {HERO_DATA.title}
+            {hero.title}
           </h1>
           <p
             data-reveal
             style={{ "--reveal-delay": "70ms" } as React.CSSProperties}
-            className="mx-auto mt-3.5 max-w-[470px] text-[13.5px] leading-[1.55] text-[#8e8e93] sm:mt-4 sm:text-[14px]"
+            className="mx-auto mt-3.5 max-w-[580px] text-[16px] font-normal leading-[25px] text-[#79716b] sm:mt-4 sm:text-[20px] sm:leading-[30px]"
           >
-            {HERO_DATA.subtitle}
+            {hero.subtitle}
           </p>
 
           <div
@@ -96,20 +81,18 @@ export const HeroTelemetry: React.FC<HeroTelemetryProps> = ({ onOpenDemo }) => {
               onClick={onOpenDemo}
               className="rounded-[6px] bg-[#ffffff] px-4 py-2.5 text-[12.5px] font-semibold text-[#111111] transition-colors duration-150 hover:bg-[#e5e5e5] sm:py-2 cursor-pointer"
             >
-              {HERO_DATA.primaryCta}
+              {hero.primaryCta}
             </button>
             <a
               href="#arquitectura"
               className="rounded-[6px] border border-white/14 bg-[#1a1a1a] px-4 py-2.5 text-[12.5px] font-medium text-[#e4e4e7] transition-colors duration-150 hover:border-white/25 hover:bg-[#242424] sm:py-2"
             >
-              {HERO_DATA.secondaryCta}
+              {hero.secondaryCta}
             </a>
           </div>
         </div>
 
-        {/* Frosted Smoked-Glass Console over Interlocking SVG Spectrum Bars */}
         <div className="relative mt-4 px-4 pt-2 sm:mt-12 sm:px-6 sm:pt-3">
-          {/* Flush interlocking SVG spectrum bars anchored at bottom (static) */}
           <div
             aria-hidden="true"
             className="pointer-events-none absolute inset-x-0 bottom-0 h-[285px] overflow-hidden sm:h-[255px]"
@@ -117,7 +100,6 @@ export const HeroTelemetry: React.FC<HeroTelemetryProps> = ({ onOpenDemo }) => {
             <HeroSpectrumSvg />
           </div>
 
-          {/* Translucent Smoked-Glass Console Card (authentic glassmorphism matching reference) */}
           <div
             ref={consoleView.ref}
             data-reveal
@@ -130,18 +112,17 @@ export const HeroTelemetry: React.FC<HeroTelemetryProps> = ({ onOpenDemo }) => {
               "--reveal-delay": "210ms",
             } as React.CSSProperties}
           >
-            {/* Single clean prompt line with animated NumberFlow live telemetry */}
             <p className="text-[13.5px] font-normal leading-[1.5] text-[#f4f4f5]/95 tabular-nums sm:text-[14px]">
               <AnimatePresence mode="wait">
                 <motion.span
-                  key={`${sector.id}-prefix`}
+                  key={`${locale}-${sector.id}-prefix`}
                   initial={{ opacity: 0, y: 5, filter: "blur(2px)" }}
                   animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
                   exit={{ opacity: 0, y: -5, filter: "blur(2px)" }}
                   transition={{ duration: 0.18, ease: [0.22, 1, 0.36, 1] }}
                   className="inline-block"
                 >
-                  {consoleConfig.prefix}
+                  {sector.consolePrefix}
                 </motion.span>
               </AnimatePresence>{" "}
               <NumberFlow
@@ -153,38 +134,31 @@ export const HeroTelemetry: React.FC<HeroTelemetryProps> = ({ onOpenDemo }) => {
               />{" "}
               <AnimatePresence mode="wait">
                 <motion.span
-                  key={`${sector.id}-suffix`}
+                  key={`${locale}-${sector.id}-suffix`}
                   initial={{ opacity: 0, y: 5, filter: "blur(2px)" }}
                   animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
                   exit={{ opacity: 0, y: -5, filter: "blur(2px)" }}
                   transition={{ duration: 0.18, ease: [0.22, 1, 0.36, 1] }}
                   className="inline"
                 >
-                  {consoleConfig.suffix}
+                  {sector.consoleSuffix}
                 </motion.span>
               </AnimatePresence>
             </p>
 
-            {/* Mobile: structured 3-col tabs + full-width bottom action row | Desktop: single horizontal row */}
             <div className="mt-5 flex flex-col gap-3 sm:mt-10 sm:flex-row sm:items-center sm:justify-between sm:gap-2">
               <div className="grid grid-cols-3 gap-1.5 sm:flex sm:flex-nowrap sm:items-center">
                 <button
                   type="button"
-                  aria-label="Cambiar escenario"
-                  onClick={() => setActiveIndex((prev) => (prev + 1) % 3)}
+                  aria-label={hero.switchScenarioLabel}
+                  onClick={() => setActiveIndex((prev) => (prev + 1) % hero.sectors.length)}
                   className="hidden h-7 w-7 shrink-0 items-center justify-center rounded-[6px] border border-white/12 bg-white/[0.06] text-[#d4d4d8] backdrop-blur-md transition-colors duration-150 hover:bg-white/[0.12] hover:text-white sm:flex cursor-pointer"
                 >
                   <TuneSparkIcon className="h-3.5 w-3.5" />
                 </button>
 
-                {TELEMETRY_SECTORS.slice(0, 3).map((item, idx) => {
+                {hero.sectors.map((item, idx) => {
                   const isActive = idx === activeIndex;
-                  const shortLabel =
-                    item.id === "zonas-francas"
-                      ? "Zonas francas"
-                      : item.id === "hoteleria"
-                        ? "Hotelería"
-                        : "Agroindustria";
                   return (
                     <button
                       key={item.id}
@@ -198,7 +172,7 @@ export const HeroTelemetry: React.FC<HeroTelemetryProps> = ({ onOpenDemo }) => {
                       }`}
                     >
                       <SectorChipIcon kind={item.id} className="hidden h-3 w-3 text-[#e4e4e7] sm:inline" />
-                      <span className="truncate">{shortLabel}</span>
+                      <span className="truncate">{item.shortLabel}</span>
                     </button>
                   );
                 })}
@@ -207,24 +181,24 @@ export const HeroTelemetry: React.FC<HeroTelemetryProps> = ({ onOpenDemo }) => {
               <div className="flex items-center justify-between gap-2 border-t border-white/10 pt-2.5 sm:shrink-0 sm:justify-end sm:border-t-0 sm:pt-0">
                 <span className="inline-flex h-7 items-center gap-1.5 whitespace-nowrap rounded-[6px] border border-white/10 bg-white/[0.06] px-2.5 text-[11px] text-[#e4e4e7] backdrop-blur-md">
                   <GlobeIcon className="h-3 w-3 text-[#60a5fa]" />
-                  <span>Costa Rica</span>
+                  <span>{hero.countryLabel}</span>
                 </span>
 
                 <button
                   type="button"
                   onClick={() => setIsSimulating((prev) => !prev)}
-                  aria-label={isSimulating ? "Pausar simulación" : "Simular telemetría"}
+                  aria-label={isSimulating ? hero.pauseLabel : hero.playLabel}
                   className="inline-flex h-8 items-center justify-center gap-1.5 rounded-[6px] bg-[#ffffff] px-3 text-[11.5px] font-semibold text-[#111111] shadow-sm transition-colors duration-150 hover:bg-[#e5e5e5] sm:w-8 sm:px-0 cursor-pointer"
                 >
                   {isSimulating ? (
                     <>
                       <PauseIcon className="h-3.5 w-3.5" />
-                      <span className="sm:hidden">Pausar</span>
+                      <span className="sm:hidden">{hero.pauseShort}</span>
                     </>
                   ) : (
                     <>
                       <PlayIcon className="h-3.5 w-3.5 translate-x-[0.5px]" />
-                      <span className="sm:hidden">Simular</span>
+                      <span className="sm:hidden">{hero.playShort}</span>
                     </>
                   )}
                 </button>

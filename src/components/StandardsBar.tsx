@@ -1,11 +1,17 @@
 import React from "react";
+import { useLocale } from "../i18n/LocaleContext";
 import { COMPANY_LOGOS } from "./CompanyLogos";
 
 export const StandardsBar: React.FC = () => {
+  const { isEn } = useLocale();
   return (
     <section
       id="estandares"
-      aria-label="Empresas y ecosistemas industriales compatibles"
+      aria-label={
+        isEn
+          ? "Compatible industrial and utility ecosystems"
+          : "Empresas y ecosistemas industriales compatibles"
+      }
       className="border-t border-b border-[var(--border-subtle)] bg-[var(--bg-canvas)]"
     >
       <div className="rail-container grid grid-cols-2 lg:grid-cols-4">
