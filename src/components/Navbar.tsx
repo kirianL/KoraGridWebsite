@@ -1,18 +1,32 @@
 import React, { useEffect, useState } from "react";
 import { NAV_LINKS } from "../data/koragrid";
+import type { Route } from "../routing/routes";
+import { ROUTE_PATHS } from "../routing/routes";
 import { ChevronRightIcon, CloseIcon, KoraGridLogo, MenuIcon } from "./Icons";
 
 interface NavbarProps {
+  currentRoute: Route;
+  onNavigate: (route: Route, sectionHash?: string) => void;
   onOpenDemo: () => void;
 }
 
-const MOBILE_NAV_LINKS = [
+const PAGE_LINKS: Array<{ label: string; route: Route }> = [
+  { label: "Nodo en planta", route: "telemetria" },
+  { label: "Simulador", route: "simulador" },
+  { label: "Auditoría ESG", route: "auditoria" },
+];
+
+const MOBILE_HOME_LINKS = [
   ...NAV_LINKS,
   { label: "Cobertura", href: "#cobertura" },
   { label: "Contacto", href: "#contacto" },
 ];
 
-export const Navbar: React.FC<NavbarProps> = ({ onOpenDemo }) => {
+export const Navbar: React.FC<NavbarProps> = ({
+  currentRoute,
+  onNavigate,
+  onOpenDemo,
+}) => {
   const [mobileOpen, setMobileOpen] = useState(false);
 
   // Lock body scroll while mobile drawer is open & close on Escape or desktop resize
@@ -39,30 +53,64 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenDemo }) => {
     };
   }, [mobileOpen]);
 
+  const handleHomeAnchor = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    e.preventDefault();
+    setMobileOpen(false);
+    onNavigate("home", href);
+  };
+
+  const handleRouteClick = (e: React.MouseEvent<HTMLAnchorElement>, route: Route) => {
+    e.preventDefault();
+    setMobileOpen(false);
+    onNavigate(route);
+  };
+
   return (
     <>
       <header className="sticky top-0 z-50 border-b border-[var(--border-subtle)] bg-[#141414]/92 pt-[env(safe-area-inset-top)] backdrop-blur-md">
         <div className="mx-auto flex h-14 max-w-[1060px] items-center justify-between px-5 sm:px-6">
-          <div className="flex items-center gap-8">
+          <div className="flex items-center gap-7">
             <a
-              href="#"
-              onClick={() => setMobileOpen(false)}
+              href="/"
+              onClick={(e) => handleRouteClick(e, "home")}
               className="flex items-center gap-2 text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[var(--accent-emerald)]"
             >
               <KoraGridLogo className="h-5 w-5" />
               <span className="text-[15px] font-medium tracking-tight">KoraGrid</span>
             </a>
 
-            <nav aria-label="Navegación principal" className="hidden items-center gap-6 lg:flex">
+            <nav aria-label="Navegación principal" className="hidden items-center gap-5 lg:flex">
               {NAV_LINKS.map((link) => (
                 <a
                   key={link.href}
                   href={link.href}
+                  onClick={(e) => handleHomeAnchor(e, link.href)}
                   className="whitespace-nowrap font-mono-tech text-[11.5px] text-[#a1a1aa] transition-colors duration-150 hover:text-[var(--text-primary)]"
                 >
                   {link.label}
                 </a>
               ))}
+
+              <span aria-hidden="true" className="h-3.5 w-px bg-white/15" />
+
+              {PAGE_LINKS.map((page) => {
+                const isActive = currentRoute === page.route;
+                return (
+                  <a
+                    key={page.route}
+                    href={ROUTE_PATHS[page.route]}
+                    onClick={(e) => handleRouteClick(e, page.route)}
+                    aria-current={isActive ? "page" : undefined}
+                    className={`whitespace-nowrap font-mono-tech text-[11.5px] transition-colors duration-150 ${
+                      isActive
+                        ? "text-[#4ade80]"
+                        : "text-[#d4d4d8] hover:text-[#4ade80]"
+                    }`}
+                  >
+                    {page.label}
+                  </a>
+                );
+              })}
             </nav>
           </div>
 
@@ -113,17 +161,41 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenDemo }) => {
           className="flex flex-1 flex-col overflow-y-auto px-5 pt-4 pb-6"
         >
           <div className="divide-y divide-white/[0.08] border-b border-white/[0.08]">
-            {MOBILE_NAV_LINKS.map((link, idx) => (
+            {PAGE_LINKS.map((page, idx) => {
+              const isActive = currentRoute === page.route;
+              return (
+                <a
+                  key={page.route}
+                  href={ROUTE_PATHS[page.route]}
+                  tabIndex={mobileOpen ? 0 : -1}
+                  onClick={(e) => handleRouteClick(e, page.route)}
+                  aria-current={isActive ? "page" : undefined}
+                  className={`flex min-h-[54px] items-center justify-between py-3 text-[17px] font-normal tracking-[-0.01em] transition-colors duration-150 ${
+                    isActive ? "text-[#4ade80]" : "text-[#e4e4e7] active:text-[#4ade80]"
+                  }`}
+                >
+                  <span className="flex items-center gap-3">
+                    <span className="font-mono-tech text-[11px] text-[#4ade80]/90">
+                      0{idx + 1}
+                    </span>
+                    <span>{page.label}</span>
+                  </span>
+                  <ChevronRightIcon className="h-4 w-4 text-[#71717a]" />
+                </a>
+              );
+            })}
+
+            {MOBILE_HOME_LINKS.map((link, idx) => (
               <a
                 key={link.href}
                 href={link.href}
                 tabIndex={mobileOpen ? 0 : -1}
-                onClick={() => setMobileOpen(false)}
-                className="flex min-h-[54px] items-center justify-between py-3 text-[17px] font-normal tracking-[-0.01em] text-[#e4e4e7] transition-colors duration-150 active:text-[#4ade80]"
+                onClick={(e) => handleHomeAnchor(e, link.href)}
+                className="flex min-h-[50px] items-center justify-between py-2.5 text-[15.5px] font-normal tracking-[-0.01em] text-[#a1a1aa] transition-colors duration-150 active:text-[#4ade80]"
               >
                 <span className="flex items-center gap-3">
-                  <span className="font-mono-tech text-[11px] text-[#4ade80]/80">
-                    0{idx + 1}
+                  <span className="font-mono-tech text-[11px] text-[#71717a]">
+                    0{idx + PAGE_LINKS.length + 1}
                   </span>
                   <span>{link.label}</span>
                 </span>
