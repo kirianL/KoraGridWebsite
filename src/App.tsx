@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
+import { useLenis } from "./hooks/useLenis";
 import { useReveal } from "./hooks/useReveal";
 import {
   matchHashRoute,
@@ -28,6 +29,7 @@ export const App: React.FC = () => {
   const [isDemoOpen, setIsDemoOpen] = useState(false);
   const pendingSection = useRef<string | null>(null);
   const isInitialMount = useRef(true);
+  const lenisRef = useLenis();
 
   useReveal(route);
 
@@ -44,12 +46,18 @@ export const App: React.FC = () => {
 
     if (section) {
       window.setTimeout(() => {
-        document.querySelector(section)?.scrollIntoView({ behavior: "smooth", block: "start" });
+        if (lenisRef.current) {
+          lenisRef.current.scrollTo(section, { offset: -56 });
+        } else {
+          document.querySelector(section)?.scrollIntoView({ behavior: "smooth", block: "start" });
+        }
       }, 60);
+    } else if (lenisRef.current) {
+      lenisRef.current.scrollTo(0, { immediate: true });
     } else {
       window.scrollTo({ top: 0, left: 0, behavior: "instant" as ScrollBehavior });
     }
-  }, [route]);
+  }, [route, lenisRef]);
 
   useEffect(() => {
     const syncRoute = () => {
@@ -71,7 +79,13 @@ export const App: React.FC = () => {
   const navigateTo = (next: Route, sectionHash?: string) => {
     if (next === route) {
       if (sectionHash) {
-        document.querySelector(sectionHash)?.scrollIntoView({ behavior: "smooth", block: "start" });
+        if (lenisRef.current) {
+          lenisRef.current.scrollTo(sectionHash, { offset: -56 });
+        } else {
+          document.querySelector(sectionHash)?.scrollIntoView({ behavior: "smooth", block: "start" });
+        }
+      } else if (lenisRef.current) {
+        lenisRef.current.scrollTo(0);
       } else {
         window.scrollTo({ top: 0, behavior: "smooth" });
       }
