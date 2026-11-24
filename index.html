@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="es">
+<html lang="es-CR">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
@@ -7,18 +7,117 @@
     <meta name="theme-color" media="(prefers-color-scheme: light)" content="#141414" />
     <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#141414" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-title" content="KoraGrid" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-    <title>KoraGrid — Telemetría energética y gestión ESG en tiempo real</title>
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
+
+    <title>KoraGrid — Telemetría energética y control ESG en tiempo real</title>
     <meta
       name="description"
-      content="Plataforma B2B desarrollada en Costa Rica para monitorear consumo eléctrico, evitar picos de demanda y auditar huella de carbono según ISO 14064, GRI y Programa País."
+      content="Plataforma B2B en Costa Rica para monitorear consumo eléctrico por circuito, evitar picos de demanda en horario punta y automatizar auditorías ISO 14064, GRI y Programa País 2.0."
     />
+    <link rel="canonical" href="https://kora-grid-website.vercel.app/" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="es_CR" />
+    <meta property="og:site_name" content="KoraGrid" />
+    <meta property="og:url" content="https://kora-grid-website.vercel.app/" />
+    <meta property="og:title" content="KoraGrid — Telemetría energética y control ESG en tiempo real" />
+    <meta
+      property="og:description"
+      content="Monitoreo eléctrico inteligente para empresas en Costa Rica. Reduzca picos de demanda y audite su huella de carbono sin procesos manuales."
+    />
+    <meta property="og:image" content="https://kora-grid-website.vercel.app/images/split-emerald-field.webp" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="KoraGrid — Telemetría energética y control ESG en tiempo real" />
+    <meta
+      name="twitter:description"
+      content="Telemetría eléctrica en vivo y evidencia auditable ISO 14064, GRI y Programa País 2.0 en Costa Rica."
+    />
+    <meta name="twitter:image" content="https://kora-grid-website.vercel.app/images/split-emerald-field.webp" />
+
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
+
+    <!-- Structured Data (SEO + GEO / AI Search Engines) -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "Organization",
+            "@id": "https://kora-grid-website.vercel.app/#organization",
+            "name": "KoraGrid",
+            "url": "https://kora-grid-website.vercel.app/",
+            "description": "Plataforma B2B de telemetría energética en tiempo real y gestión ESG desarrollada en Costa Rica.",
+            "address": {
+              "@type": "PostalAddress",
+              "addressLocality": "San José",
+              "addressCountry": "CR"
+            },
+            "areaServed": [
+              { "@type": "Country", "name": "Costa Rica" },
+              { "@type": "Place", "name": "Centroamérica" }
+            ]
+          },
+          {
+            "@type": "SoftwareApplication",
+            "@id": "https://kora-grid-website.vercel.app/#software",
+            "name": "KoraGrid",
+            "applicationCategory": "BusinessApplication",
+            "operatingSystem": "Web",
+            "inLanguage": "es-CR",
+            "publisher": { "@id": "https://kora-grid-website.vercel.app/#organization" },
+            "description": "Sistema de monitoreo eléctrico por circuito, control preventivo de demanda punta y automatización de inventarios GEI bajo ISO 14064, GRI, ISO 50001, Bandera Azul Ecológica y Programa País Carbono Neutralidad 2.0.",
+            "featureList": [
+              "Lectura de medidores cada 60 segundos sin digitación manual",
+              "Alertas preventivas de picos de demanda en ventanas de 15 minutos",
+              "Conversión automática a tCO2e con factores oficiales de Costa Rica",
+              "Trazabilidad auditable para ISO 14064, GRI y Programa País 2.0"
+            ]
+          },
+          {
+            "@type": "FAQPage",
+            "@id": "https://kora-grid-website.vercel.app/#faq",
+            "mainEntity": [
+              {
+                "@type": "Question",
+                "name": "¿Cómo reduce KoraGrid los picos de demanda eléctrica en Costa Rica?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "KoraGrid muestrea cada circuito cada 60 segundos y proyecta ventanas de 15 minutos para emitir alertas operativas antes de que se registre un pico tarifario en horario punta."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "¿Qué estándares ambientales y de carbono soporta la plataforma?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Automatiza inventarios de Alcance 1 y 2 y genera paquetes de evidencia auditables para Programa País Carbono Neutralidad 2.0, ISO 14064, ISO 50001, GRI, GHG Protocol y Bandera Azul Ecológica."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "¿Para qué industrias está diseñada la telemetría de KoraGrid?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Está enfocada en zonas francas y manufactura MedTech, hotelería de gran escala, agroindustria exportadora y operadores logísticos en Costa Rica y Centroamérica."
+                }
+              }
+            ]
+          }
+        ]
+      }
+    </script>
   </head>
   <body>
     <div id="root"></div>

@@ -40,6 +40,8 @@ export const LightChallengesSection: React.FC = () => {
                 <img
                   src={company.src}
                   alt={company.name}
+                  loading="lazy"
+                  decoding="async"
                   className={`${company.lightHeightClass} object-contain brightness-0 opacity-85 transition-opacity duration-150 hover:opacity-100 select-none`}
                 />
               </div>
@@ -90,6 +92,8 @@ export const LightChallengesSection: React.FC = () => {
                   aria-hidden="true"
                   width={1344}
                   height={768}
+                  loading="lazy"
+                  decoding="async"
                   className="pointer-events-none absolute inset-0 h-full w-full object-cover opacity-90 select-none"
                 />
                 <div className="relative z-10 flex items-center justify-center">

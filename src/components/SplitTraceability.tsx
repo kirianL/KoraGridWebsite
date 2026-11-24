@@ -118,10 +118,12 @@ export const SplitTraceability: React.FC<SplitTraceabilityProps> = ({ onOpenDemo
           className="relative flex min-h-[340px] flex-col justify-between overflow-hidden p-5 sm:min-h-[480px] sm:p-8 lg:col-span-7 lg:min-h-[560px]"
         >
           <img
-            src="/images/split-emerald-field.png"
+            src="/images/split-emerald-field.webp"
             alt="Campo cromático azul cobalto de telemetría KoraGrid"
             width={1024}
             height={1024}
+            loading="lazy"
+            decoding="async"
             className="pointer-events-none absolute inset-0 h-full w-full object-cover select-none"
           />
 

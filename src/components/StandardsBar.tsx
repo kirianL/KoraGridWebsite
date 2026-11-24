@@ -29,6 +29,8 @@ export const StandardsBar: React.FC = () => {
               <img
                 src={company.src}
                 alt={company.name}
+                loading="lazy"
+                decoding="async"
                 className={`${company.heightClass} object-contain brightness-0 invert opacity-80 transition-opacity duration-150 hover:opacity-100 select-none`}
               />
             </div>

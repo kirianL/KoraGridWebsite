@@ -1,0 +1,32 @@
+# KoraGrid
+
+> Plataforma B2B de telemetría energética en tiempo real, control de picos de demanda eléctrica y automatización de inventarios ESG desarrollada en San José, Costa Rica.
+
+## Resumen ejecutivo
+KoraGrid centraliza lecturas de medidores eléctricos inteligentes, submedición por circuito y consumo de combustible en operaciones industriales, turísticas y logísticas de Costa Rica y Centroamérica. El sistema previene recargos por demanda máxima en horario punta y genera respaldos auditables de gases de efecto invernadero (Alcance 1 y Alcance 2) sin hojas de cálculo manuales.
+
+## Capacidades principales
+- Telemetría eléctrica en vivo con muestreo cada 60 segundos en subestaciones, chillers, cuartos limpios, calderas y tableros críticos.
+- Alertas preventivas en ventanas de 15 minutos antes de superar el umbral tarifario en bloque horario punta.
+- Conversión automática de kWh y combustible a toneladas de CO2 equivalente (tCO2e) con factores oficiales actualizados de Costa Rica.
+- Generación de expedientes listos para auditoría bajo estándares internacionales y nacionales.
+
+## Estándares y certificaciones compatibles
+- ISO 14064 (Inventario de Gases de Efecto Invernadero)
+- ISO 50001 (Gestión energética)
+- GRI (Global Reporting Initiative)
+- Programa País Carbono Neutralidad 2.0 (Costa Rica)
+- Bandera Azul Ecológica
+- GHG Protocol
+
+## Sectores atendidos
+- Zonas francas y manufactura avanzada MedTech
+- Hotelería de gran escala (Guanacaste y Pacífico)
+- Agroindustria exportadora (Zona Norte y Caribe)
+- Operadores logísticos y centros de distribución (GAM y Centroamérica)
+
+## Cobertura y contacto
+- Sede: San José, Costa Rica
+- Cobertura operativa: Todo el territorio de Costa Rica con proyección a Centroamérica
+- Sitio web: https://kora-grid-website.vercel.app/
+- Autoría técnica: Craft by kirian (https://kirian.dev)

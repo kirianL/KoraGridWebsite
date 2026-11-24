@@ -185,21 +185,21 @@ export const LIGHT_CHALLENGES = {
   pillars: [
     {
       id: "fragmented-meters",
-      image: "/images/pillar-bg-1.png",
+      image: "/images/pillar-bg-1.webp",
       title: "Medición dispersa entre sedes",
       description:
         "Lecturas aisladas en tableros eléctricos, generadores y hojas de cálculo impiden detectar desviaciones de carga cuando aún se pueden corregir.",
     },
     {
       id: "manual-esg",
-      image: "/images/pillar-bg-2.png",
+      image: "/images/pillar-bg-2.webp",
       title: "Auditorías ambientales lentas",
       description:
         "Recopilar facturas y factores de emisión para Programa País Carbono Neutralidad 2.0 o Bandera Azul Ecológica consume semanas de trabajo técnico.",
     },
     {
       id: "export-compliance",
-      image: "/images/pillar-bg-3.png",
+      image: "/images/pillar-bg-3.webp",
       title: "Exigencias de exportación global",
       description:
         "Clientes en EE. UU. y Europa solicitan trazabilidad verificable bajo ISO 14064 y GRI con respaldo auditado de cada tonelada reportada.",

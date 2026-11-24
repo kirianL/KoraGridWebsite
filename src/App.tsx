@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { Suspense, lazy, useState } from "react";
 import { useLenis } from "./hooks/useLenis";
 import { useReveal } from "./hooks/useReveal";
 import { Navbar } from "./components/Navbar";
@@ -9,9 +9,19 @@ import { VerticalHatchDivider } from "./components/VerticalHatchDivider";
 import { SplitTraceability } from "./components/SplitTraceability";
 import { LightChallengesSection } from "./components/LightChallengesSection";
 import { ContextualPrecisionCarousel } from "./components/ContextualPrecisionCarousel";
-import { RegionalTelemetryMap } from "./components/RegionalTelemetryMap";
 import { ClosingCtaAndFooter } from "./components/ClosingCtaAndFooter";
-import { DemoContactModal } from "./components/DemoContactModal";
+
+const RegionalTelemetryMap = lazy(() =>
+  import("./components/RegionalTelemetryMap").then((m) => ({
+    default: m.RegionalTelemetryMap,
+  }))
+);
+
+const DemoContactModal = lazy(() =>
+  import("./components/DemoContactModal").then((m) => ({
+    default: m.DemoContactModal,
+  }))
+);
 
 export const App: React.FC = () => {
   const [isDemoOpen, setIsDemoOpen] = useState(false);
@@ -32,11 +42,27 @@ export const App: React.FC = () => {
         <LightChallengesSection />
         <ContextualPrecisionCarousel onOpenDemo={() => setIsDemoOpen(true)} />
         <VerticalHatchDivider />
-        <RegionalTelemetryMap onOpenDemo={() => setIsDemoOpen(true)} />
+        <Suspense
+          fallback={
+            <section
+              id="cobertura"
+              aria-hidden="true"
+              className="border-t border-[var(--border-subtle)] bg-[var(--bg-canvas)]"
+            >
+              <div className="rail-container min-h-[480px] bg-[var(--bg-surface-primary)]" />
+            </section>
+          }
+        >
+          <RegionalTelemetryMap onOpenDemo={() => setIsDemoOpen(true)} />
+        </Suspense>
       </main>
 
       <ClosingCtaAndFooter onOpenDemo={() => setIsDemoOpen(true)} />
-      <DemoContactModal isOpen={isDemoOpen} onClose={() => setIsDemoOpen(false)} />
+      {isDemoOpen && (
+        <Suspense fallback={null}>
+          <DemoContactModal isOpen={isDemoOpen} onClose={() => setIsDemoOpen(false)} />
+        </Suspense>
+      )}
     </div>
   );
 };
