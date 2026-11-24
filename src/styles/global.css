@@ -44,6 +44,19 @@
   border-right: 1px solid var(--border-subtle);
 }
 
+/* Hero full viewport lock for mobile viewports (guarantees hero occupies full screen without next section leaking) */
+.hero-viewport-mobile {
+  min-height: calc(100vh - 56px);
+  min-height: calc(100svh - 56px - env(safe-area-inset-top, 0px));
+  min-height: calc(100dvh - 56px - env(safe-area-inset-top, 0px));
+}
+
+@media (min-width: 640px) {
+  .hero-viewport-mobile {
+    min-height: auto;
+  }
+}
+
 .rail-container-light {
   width: 100%;
   max-width: var(--rail-max-width);
