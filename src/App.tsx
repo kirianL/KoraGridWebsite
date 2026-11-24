@@ -16,7 +16,6 @@ import { VerticalHatchDivider } from "./components/VerticalHatchDivider";
 import { SplitTraceability } from "./components/SplitTraceability";
 import { LightChallengesSection } from "./components/LightChallengesSection";
 import { ContextualPrecisionCarousel } from "./components/ContextualPrecisionCarousel";
-import { InteractiveToolsStrip } from "./components/InteractiveToolsStrip";
 import { RegionalTelemetryMap } from "./components/RegionalTelemetryMap";
 import { ClosingCtaAndFooter } from "./components/ClosingCtaAndFooter";
 import { DemoContactModal } from "./components/DemoContactModal";
@@ -114,7 +113,6 @@ export const App: React.FC = () => {
                 <VerticalHatchDivider />
                 <LightChallengesSection />
                 <ContextualPrecisionCarousel onOpenDemo={() => setIsDemoOpen(true)} />
-                <InteractiveToolsStrip onNavigate={(r) => navigateTo(r)} />
                 <VerticalHatchDivider />
                 <RegionalTelemetryMap onOpenDemo={() => setIsDemoOpen(true)} />
               </>
