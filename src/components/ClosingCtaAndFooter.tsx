@@ -26,7 +26,6 @@ export const ClosingCtaAndFooter: React.FC<ClosingCtaAndFooterProps> = ({ onNavi
       {/* Upper Contact Section housing the Rounded-Top Textured Card (exact cyanotype/watercolor wash effect) */}
       <div className="rail-container bg-[var(--bg-surface-primary)] px-4 pt-12 sm:px-8 sm:pt-16 lg:px-10 lg:pt-20">
         <div
-          data-reveal
           className="relative overflow-hidden rounded-t-[18px] sm:rounded-t-[24px]"
           style={{
             background:
