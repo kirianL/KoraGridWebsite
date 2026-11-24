@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import NumberFlow from "@number-flow/react";
 import { AnimatePresence, motion } from "motion/react";
 import { CONTEXTUAL_CASES } from "../data/koragrid";
 import { ChevronLeftIcon, ChevronRightIcon } from "./Icons";
@@ -25,8 +26,8 @@ export const ContextualPrecisionCarousel: React.FC<ContextualPrecisionCarouselPr
     <section id="industrias" className="bg-[var(--bg-canvas)]">
       <div className="rail-container bg-[var(--bg-surface-primary)] px-5 py-12 sm:px-10 sm:py-20 lg:px-12 lg:py-24">
         {/* Header Row: On mobile CTA + arrows share one clean horizontal row; desktop keeps exact layout */}
-        <div data-reveal className="flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between sm:gap-6">
-          <div>
+        <div className="flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between sm:gap-6">
+          <div data-reveal style={{ "--reveal-delay": "0ms" } as React.CSSProperties}>
             <h2 className="max-w-[440px] text-[28px] font-normal leading-[1.15] tracking-[-0.025em] text-[var(--text-primary)] sm:text-[38px]">
               Precisión operativa para cada industria
             </h2>
@@ -39,7 +40,11 @@ export const ContextualPrecisionCarousel: React.FC<ContextualPrecisionCarouselPr
             </button>
           </div>
 
-          <div className="flex items-center justify-between gap-3 sm:justify-end">
+          <div
+            data-reveal
+            style={{ "--reveal-delay": "70ms" } as React.CSSProperties}
+            className="flex items-center justify-between gap-3 sm:justify-end"
+          >
             <button
               type="button"
               onClick={onOpenDemo}
@@ -69,20 +74,30 @@ export const ContextualPrecisionCarousel: React.FC<ContextualPrecisionCarouselPr
           </div>
         </div>
 
-        {/* Slide Content with fluid motion text reveal */}
-        <div aria-live="polite" className="mt-8 min-h-[140px] sm:mt-10 sm:min-h-[170px]">
+        {/* Slide Content with fluid NumberFlow counter + motion text reveal */}
+        <div
+          aria-live="polite"
+          data-reveal
+          style={{ "--reveal-delay": "130ms" } as React.CSSProperties}
+          className="mt-8 min-h-[140px] sm:mt-10 sm:min-h-[170px]"
+        >
+          <span className="inline-flex items-center gap-1 font-mono-tech text-[11px] tabular-nums text-[var(--text-muted)]">
+            <NumberFlow
+              value={index + 1}
+              format={{ minimumIntegerDigits: 2 }}
+              className="nf-number"
+            />
+            <span>/ 0{CONTEXTUAL_CASES.length}</span>
+          </span>
+
           <AnimatePresence mode="wait">
             <motion.div
               key={current.index}
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -10 }}
+              initial={{ opacity: 0, y: 10, filter: "blur(3px)" }}
+              animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+              exit={{ opacity: 0, y: -10, filter: "blur(3px)" }}
               transition={{ duration: 0.24, ease: [0.16, 1, 0.3, 1] }}
             >
-              <span className="font-mono-tech text-[11px] text-[var(--text-muted)]">
-                {current.index}
-              </span>
-
               <p className="mt-3 max-w-[920px] text-[23px] font-normal leading-[1.28] tracking-[-0.02em] text-[#6f7472] sm:mt-4 sm:text-[40px] sm:leading-[1.22]">
                 <span className="text-[#4ade80]">{current.highlighted}</span> {current.rest}
               </p>

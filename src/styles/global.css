@@ -77,19 +77,28 @@
   border-bottom: 1px solid var(--border-subtle);
 }
 
-/* Scroll-triggered entrance choreography (emil-design-eng / find-animation-opportunities) */
+/* Scroll-triggered entrance choreography (financewebsite + transitions-dev 18-texts-reveal) */
 [data-reveal] {
   opacity: 1;
   transform: translateY(0) scale(1);
+  filter: blur(0px);
   transition:
     opacity var(--dur-reveal) var(--ease-out-quint),
-    transform var(--dur-reveal) var(--ease-out-quint);
+    transform var(--dur-reveal) var(--ease-out-quint),
+    filter var(--dur-reveal) var(--ease-out-quint);
   transition-delay: var(--reveal-delay, 0ms);
+  will-change: transform, opacity, filter;
 }
 
 [data-reveal][data-revealed="false"] {
   opacity: 0;
-  transform: translateY(14px) scale(0.985);
+  transform: translateY(14px) scale(0.99);
+  filter: blur(3px);
+  transition:
+    opacity 180ms ease,
+    transform 0s linear 180ms,
+    filter 0s linear 180ms;
+  transition-delay: 0ms;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -98,11 +107,13 @@
   }
   [data-reveal] {
     transform: none !important;
+    filter: none !important;
     transition: opacity 200ms ease !important;
   }
   [data-reveal][data-revealed="false"] {
     opacity: 0;
     transform: none !important;
+    filter: none !important;
   }
 }
 

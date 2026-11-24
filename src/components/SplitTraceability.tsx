@@ -65,12 +65,20 @@ export const SplitTraceability: React.FC<SplitTraceabilityProps> = ({ onOpenDemo
     <section id="trazabilidad" className="bg-[var(--bg-canvas)]">
       <div className="rail-container grid grid-cols-1 bg-[var(--bg-surface-primary)] lg:grid-cols-12">
         {/* Left Column (~38%): Continuous natural prose with inline [1]..[5] badges on all viewports */}
-        <div data-reveal className="flex flex-col justify-start border-b border-[var(--border-subtle)] px-5 py-10 sm:p-10 lg:col-span-5 lg:border-r lg:border-b-0 lg:p-12">
-          <h2 className="text-[28px] font-normal leading-[1.12] tracking-[-0.025em] text-[var(--text-primary)] sm:text-[38px]">
+        <div className="flex flex-col justify-start border-b border-[var(--border-subtle)] px-5 py-10 sm:p-10 lg:col-span-5 lg:border-r lg:border-b-0 lg:p-12">
+          <h2
+            data-reveal
+            style={{ "--reveal-delay": "0ms" } as React.CSSProperties}
+            className="text-[28px] font-normal leading-[1.12] tracking-[-0.025em] text-[var(--text-primary)] sm:text-[38px]"
+          >
             Precisión verificable en cada circuito
           </h2>
 
-          <p className="mt-5 text-[17px] font-normal leading-[1.52] tracking-[-0.01em] sm:mt-7 sm:text-[21px] sm:leading-[1.48]">
+          <p
+            data-reveal
+            style={{ "--reveal-delay": "80ms" } as React.CSSProperties}
+            className="mt-5 text-[17px] font-normal leading-[1.52] tracking-[-0.01em] sm:mt-7 sm:text-[21px] sm:leading-[1.48]"
+          >
             {TRACEABILITY_SENTENCES.map((step, idx) => {
               const isSelected = idx === activeStep;
               return (
@@ -104,7 +112,11 @@ export const SplitTraceability: React.FC<SplitTraceabilityProps> = ({ onOpenDemo
         </div>
 
         {/* Right Column (~62%): Flush full-bleed green gradient card */}
-        <div className="relative flex min-h-[340px] flex-col justify-between overflow-hidden p-5 sm:min-h-[480px] sm:p-8 lg:col-span-7 lg:min-h-[560px]">
+        <div
+          data-reveal
+          style={{ "--reveal-delay": "140ms" } as React.CSSProperties}
+          className="relative flex min-h-[340px] flex-col justify-between overflow-hidden p-5 sm:min-h-[480px] sm:p-8 lg:col-span-7 lg:min-h-[560px]"
+        >
           <img
             src="/images/split-emerald-field.png"
             alt="Campo cromático verde esmeralda de telemetría KoraGrid"
@@ -118,9 +130,9 @@ export const SplitTraceability: React.FC<SplitTraceabilityProps> = ({ onOpenDemo
             <AnimatePresence mode="wait">
               <motion.p
                 key={current.id}
-                initial={{ opacity: 0, y: 8 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -8 }}
+                initial={{ opacity: 0, y: 8, filter: "blur(3px)" }}
+                animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                exit={{ opacity: 0, y: -8, filter: "blur(3px)" }}
                 transition={{ duration: 0.22, ease: [0.16, 1, 0.3, 1] }}
                 className="text-[19px] font-normal leading-[1.45] tracking-[-0.01em] text-[#092616] sm:text-[22px]"
               >

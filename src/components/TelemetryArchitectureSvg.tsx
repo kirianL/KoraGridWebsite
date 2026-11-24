@@ -1,4 +1,7 @@
 import React, { useState } from "react";
+import NumberFlow from "@number-flow/react";
+import { AnimatePresence, motion } from "motion/react";
+import { useInViewState } from "../hooks/useReveal";
 
 interface IsoNode {
   id: string;
@@ -176,10 +179,12 @@ export const TelemetryArchitectureSvg: React.FC<{ className?: string }> = ({
   className = "w-full max-w-[440px] h-auto",
 }) => {
   const [activeId, setActiveId] = useState<string | null>(null);
+  const { ref, inView } = useInViewState<HTMLDivElement>(0.25);
   const activeNode = ISO_NODES.find((n) => n.id === activeId) ?? null;
 
   return (
     <div
+      ref={ref}
       className={`select-none ${className}`}
       onMouseLeave={() => setActiveId(null)}
     >
@@ -442,21 +447,45 @@ export const TelemetryArchitectureSvg: React.FC<{ className?: string }> = ({
         )}
       </svg>
 
-      {/* Minimal fixed-height technical telemetry readout strip */}
-      <div className="mt-2 flex h-6 items-center justify-between border-t border-white/[0.06] pt-2 font-mono-tech text-[11px] tabular-nums">
-        {activeNode ? (
-          <>
-            <span className="truncate pr-2 text-[#e4e4e7]">
-              <span className="text-[#4ade80]">[{activeNode.code}]</span> {activeNode.label}
-            </span>
-            <span className="shrink-0 text-[#4ade80]">{activeNode.metric}</span>
-          </>
-        ) : (
-          <>
-            <span className="text-[#71717a]">[00] Arquitectura modular KoraGrid</span>
-            <span className="text-[#71717a]">11 nodos activos</span>
-          </>
-        )}
+      {/* Minimal fixed-height technical telemetry readout strip with animated text swap + NumberFlow */}
+      <div className="mt-2 h-6 overflow-hidden border-t border-white/[0.06] pt-2 font-mono-tech text-[11px] tabular-nums">
+        <AnimatePresence mode="wait">
+          {activeNode ? (
+            <motion.div
+              key={activeNode.id}
+              initial={{ opacity: 0, y: 4, filter: "blur(2px)" }}
+              animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+              exit={{ opacity: 0, y: -4, filter: "blur(2px)" }}
+              transition={{ duration: 0.16, ease: [0.22, 1, 0.36, 1] }}
+              className="flex items-center justify-between"
+            >
+              <span className="truncate pr-2 text-[#e4e4e7]">
+                <span className="text-[#4ade80]">[{activeNode.code}]</span> {activeNode.label}
+              </span>
+              <span className="shrink-0 text-[#4ade80]">{activeNode.metric}</span>
+            </motion.div>
+          ) : (
+            <motion.div
+              key="idle"
+              initial={{ opacity: 0, y: 4, filter: "blur(2px)" }}
+              animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+              exit={{ opacity: 0, y: -4, filter: "blur(2px)" }}
+              transition={{ duration: 0.16, ease: [0.22, 1, 0.36, 1] }}
+              className="flex items-center justify-between"
+            >
+              <span className="text-[#71717a]">[00] Arquitectura modular KoraGrid</span>
+              <span className="text-[#71717a]">
+                <NumberFlow
+                  value={inView ? 11 : 1}
+                  format={{ maximumFractionDigits: 0 }}
+                  trend={1}
+                  className="nf-number"
+                />{" "}
+                nodos activos
+              </span>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
 
       {/* Mobile-only quick tap chips for thumb exploration (since mobile has no hover) */}

@@ -23,10 +23,18 @@ export const LightChallengesSection: React.FC = () => {
       {/* Top Trust Strip inside White Section (symmetric 2x2 on mobile, inline flex on sm+) */}
       <div className="border-b border-[var(--border-light-subtle)]">
         <div className="rail-container-light flex flex-col gap-5 px-5 py-6 sm:flex-row sm:flex-wrap sm:items-center sm:justify-between sm:gap-6 sm:px-10 lg:px-12">
-          <p className="max-w-[240px] text-[12px] leading-[1.45] text-[var(--text-on-light-secondary)] sm:max-w-[200px]">
+          <p
+            data-reveal
+            style={{ "--reveal-delay": "0ms" } as React.CSSProperties}
+            className="max-w-[240px] text-[12px] leading-[1.45] text-[var(--text-on-light-secondary)] sm:max-w-[200px]"
+          >
             Ecosistema industrial y de telemetría en Costa Rica
           </p>
-          <div className="grid grid-cols-2 items-center gap-x-6 gap-y-5 sm:flex sm:flex-wrap sm:gap-x-9 sm:gap-y-4">
+          <div
+            data-reveal
+            style={{ "--reveal-delay": "60ms" } as React.CSSProperties}
+            className="grid grid-cols-2 items-center gap-x-6 gap-y-5 sm:flex sm:flex-wrap sm:gap-x-9 sm:gap-y-4"
+          >
             {COMPANY_LOGOS.map((company) => (
               <div key={company.id} className="flex items-center justify-start sm:justify-center">
                 <img
@@ -42,11 +50,19 @@ export const LightChallengesSection: React.FC = () => {
 
       {/* Main White Challenges Grid with 4 Corner Registration Dots */}
       <div className="rail-container-light bg-[var(--bg-light-canvas)] px-5 py-12 sm:px-10 sm:py-20 lg:px-12 lg:py-24">
-        <div data-reveal className="max-w-[580px]">
-          <h2 className="text-[28px] font-medium leading-[1.12] tracking-[-0.025em] text-[var(--text-on-light-primary)] sm:text-[42px]">
+        <div className="max-w-[580px]">
+          <h2
+            data-reveal
+            style={{ "--reveal-delay": "0ms" } as React.CSSProperties}
+            className="text-[28px] font-medium leading-[1.12] tracking-[-0.025em] text-[var(--text-on-light-primary)] sm:text-[42px]"
+          >
             {LIGHT_CHALLENGES.title}
           </h2>
-          <p className="mt-3.5 text-[14px] leading-[1.6] text-[var(--text-on-light-secondary)] sm:mt-4 sm:text-[15.5px]">
+          <p
+            data-reveal
+            style={{ "--reveal-delay": "75ms" } as React.CSSProperties}
+            className="mt-3.5 text-[14px] leading-[1.6] text-[var(--text-on-light-secondary)] sm:mt-4 sm:text-[15.5px]"
+          >
             {LIGHT_CHALLENGES.subtitle}
           </p>
         </div>
@@ -57,7 +73,7 @@ export const LightChallengesSection: React.FC = () => {
             <article
               key={pillar.id}
               data-reveal
-              style={{ "--reveal-delay": `${idx * 100}ms` } as React.CSSProperties}
+              style={{ "--reveal-delay": `${idx * 90}ms` } as React.CSSProperties}
               className="relative flex flex-col border border-[var(--border-light-subtle)] bg-[var(--bg-light-canvas)] p-4 transition-colors duration-150 hover:border-[var(--border-light-strong)] sm:p-5"
             >
               {/* 4 corner registration dots */}

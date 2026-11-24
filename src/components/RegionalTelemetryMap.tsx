@@ -53,14 +53,26 @@ export const RegionalTelemetryMap: React.FC<RegionalTelemetryMapProps> = ({
       <div className="rail-container grid grid-cols-1 items-stretch overflow-hidden bg-[var(--bg-surface-primary)] lg:grid-cols-12">
         {/* Clean Left Editorial Column */}
         <div className="relative z-10 flex flex-col justify-center px-5 pt-12 pb-6 sm:px-10 sm:pt-20 sm:pb-10 lg:col-span-5 lg:py-24 lg:pr-6 lg:pl-12">
-          <h2 className="text-[28px] font-normal leading-[1.12] tracking-[-0.025em] text-[var(--text-primary)] sm:text-[38px]">
+          <h2
+            data-reveal
+            style={{ "--reveal-delay": "0ms" } as React.CSSProperties}
+            className="text-[28px] font-normal leading-[1.12] tracking-[-0.025em] text-[var(--text-primary)] sm:text-[38px]"
+          >
             Operación nacional en Costa Rica
           </h2>
-          <p className="mt-3.5 max-w-[390px] text-[14px] leading-[1.6] text-[var(--text-secondary)] sm:mt-4 sm:text-[14.5px]">
+          <p
+            data-reveal
+            style={{ "--reveal-delay": "75ms" } as React.CSSProperties}
+            className="mt-3.5 max-w-[390px] text-[14px] leading-[1.6] text-[var(--text-secondary)] sm:mt-4 sm:text-[14.5px]"
+          >
             Telemetría energética y auditoría ambiental desplegada en zonas francas, hotelería, agroindustria y centros logísticos en todo el país, con proyección hacia Centroamérica.
           </p>
 
-          <div className="mt-5 sm:mt-6">
+          <div
+            data-reveal
+            style={{ "--reveal-delay": "140ms" } as React.CSSProperties}
+            className="mt-5 sm:mt-6"
+          >
             <button
               type="button"
               onClick={onOpenDemo}
@@ -72,7 +84,11 @@ export const RegionalTelemetryMap: React.FC<RegionalTelemetryMapProps> = ({
         </div>
 
         {/* Right Free Full-Bleed Map (no box/container, flows top-to-bottom edge-to-edge) */}
-        <div className="relative min-h-[280px] overflow-hidden sm:min-h-[420px] lg:col-span-7 lg:min-h-[480px]">
+        <div
+          data-reveal
+          style={{ "--reveal-delay": "100ms" } as React.CSSProperties}
+          className="relative min-h-[280px] overflow-hidden sm:min-h-[420px] lg:col-span-7 lg:min-h-[480px]"
+        >
           <svg
             viewBox={`0 0 ${WIDTH} ${HEIGHT}`}
             preserveAspectRatio="xMidYMid slice"

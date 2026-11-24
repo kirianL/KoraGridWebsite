@@ -16,6 +16,8 @@ export const StandardsBar: React.FC = () => {
           return (
             <div
               key={company.id}
+              data-reveal
+              style={{ "--reveal-delay": `${idx * 55}ms` } as React.CSSProperties}
               className={`flex h-[88px] items-center justify-center px-6 transition-colors duration-150 hover:bg-[#191a19] ${
                 isRightMobile ? "" : "border-r border-[var(--border-subtle)]"
               } ${

@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import NumberFlow from "@number-flow/react";
+import { AnimatePresence, motion } from "motion/react";
 import { HERO_DATA, TELEMETRY_SECTORS } from "../data/koragrid";
+import { useInViewState } from "../hooks/useReveal";
 import { HeroSpectrumSvg } from "./HeroSpectrumSvg";
 import { GlobeIcon, PauseIcon, PlayIcon, SectorChipIcon } from "./Icons";
 
@@ -52,26 +54,43 @@ export const HeroTelemetry: React.FC<HeroTelemetryProps> = ({ onOpenDemo }) => {
     return () => window.clearInterval(timer);
   }, [isSimulating]);
 
+  const consoleView = useInViewState<HTMLDivElement>(0.2);
+
   const baseKw = parseFloat(sector.readingKw.replace(" kW", ""));
   const currentKw = isSimulating
     ? Number((baseKw + (pulseTick === 0 ? 1.4 : pulseTick === 1 ? -0.9 : 0.6)).toFixed(1))
     : baseKw;
+  const displayKw = consoleView.inView
+    ? currentKw
+    : Number((currentKw * 0.88).toFixed(1));
 
   const consoleConfig = CONSOLE_SECTORS[sector.id] ?? CONSOLE_SECTORS["zonas-francas"];
 
   return (
     <section id="plataforma" className="hero-viewport-mobile flex flex-col bg-[var(--bg-canvas)]">
       <div className="hero-viewport-mobile rail-container flex flex-1 flex-col justify-between bg-[var(--bg-surface-primary)] pt-8 pb-0 sm:block sm:min-h-0 sm:pt-16">
-        {/* Centered 2-line Hero Copy with scroll reveal */}
-        <div data-reveal className="mx-auto my-auto max-w-[660px] px-5 py-3 text-center sm:my-0 sm:px-8 sm:py-0">
-          <h1 className="text-[31px] font-normal leading-[1.08] tracking-[-0.03em] text-[var(--text-primary)] sm:text-[50px]">
+        {/* Centered 2-line Hero Copy with staggered scroll reveal */}
+        <div className="mx-auto my-auto max-w-[660px] px-5 py-3 text-center sm:my-0 sm:px-8 sm:py-0">
+          <h1
+            data-reveal
+            style={{ "--reveal-delay": "0ms" } as React.CSSProperties}
+            className="text-[31px] font-normal leading-[1.08] tracking-[-0.03em] text-[var(--text-primary)] sm:text-[50px]"
+          >
             {HERO_DATA.title}
           </h1>
-          <p className="mx-auto mt-3.5 max-w-[470px] text-[13.5px] leading-[1.55] text-[#8e8e93] sm:mt-4 sm:text-[14px]">
+          <p
+            data-reveal
+            style={{ "--reveal-delay": "70ms" } as React.CSSProperties}
+            className="mx-auto mt-3.5 max-w-[470px] text-[13.5px] leading-[1.55] text-[#8e8e93] sm:mt-4 sm:text-[14px]"
+          >
             {HERO_DATA.subtitle}
           </p>
 
-          <div className="mt-5 grid grid-cols-2 gap-2.5 sm:mt-6 sm:flex sm:flex-wrap sm:items-center sm:justify-center">
+          <div
+            data-reveal
+            style={{ "--reveal-delay": "140ms" } as React.CSSProperties}
+            className="mt-5 grid grid-cols-2 gap-2.5 sm:mt-6 sm:flex sm:flex-wrap sm:items-center sm:justify-center"
+          >
             <button
               type="button"
               onClick={onOpenDemo}
@@ -100,6 +119,7 @@ export const HeroTelemetry: React.FC<HeroTelemetryProps> = ({ onOpenDemo }) => {
 
           {/* Translucent Smoked-Glass Console Card (authentic glassmorphism matching reference) */}
           <div
+            ref={consoleView.ref}
             data-reveal
             className="relative z-10 mx-auto mb-[156px] flex min-h-[156px] max-w-[650px] flex-col justify-between rounded-[8px] border border-white/[0.12] px-4 py-4 backdrop-blur-2xl sm:mb-[102px] sm:min-h-[164px] sm:px-6 sm:py-5"
             style={{
@@ -107,19 +127,42 @@ export const HeroTelemetry: React.FC<HeroTelemetryProps> = ({ onOpenDemo }) => {
                 "linear-gradient(180deg, rgba(36, 36, 38, 0.72) 0%, rgba(22, 22, 24, 0.56) 100%)",
               boxShadow:
                 "inset 0 1px 0 rgba(255, 255, 255, 0.12), 0 28px 64px rgba(0, 0, 0, 0.58)",
-              "--reveal-delay": "120ms",
+              "--reveal-delay": "210ms",
             } as React.CSSProperties}
           >
             {/* Single clean prompt line with animated NumberFlow live telemetry */}
             <p className="text-[13.5px] font-normal leading-[1.5] text-[#f4f4f5]/95 tabular-nums sm:text-[14px]">
-              <span>{consoleConfig.prefix}</span>{" "}
+              <AnimatePresence mode="wait">
+                <motion.span
+                  key={`${sector.id}-prefix`}
+                  initial={{ opacity: 0, y: 5, filter: "blur(2px)" }}
+                  animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                  exit={{ opacity: 0, y: -5, filter: "blur(2px)" }}
+                  transition={{ duration: 0.18, ease: [0.22, 1, 0.36, 1] }}
+                  className="inline-block"
+                >
+                  {consoleConfig.prefix}
+                </motion.span>
+              </AnimatePresence>{" "}
               <NumberFlow
-                value={currentKw}
+                value={displayKw}
                 format={{ minimumFractionDigits: 1, maximumFractionDigits: 1 }}
                 suffix=" kW"
+                trend={1}
                 className="nf-number font-semibold text-[#4ade80]"
               />{" "}
-              <span>{consoleConfig.suffix}</span>
+              <AnimatePresence mode="wait">
+                <motion.span
+                  key={`${sector.id}-suffix`}
+                  initial={{ opacity: 0, y: 5, filter: "blur(2px)" }}
+                  animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                  exit={{ opacity: 0, y: -5, filter: "blur(2px)" }}
+                  transition={{ duration: 0.18, ease: [0.22, 1, 0.36, 1] }}
+                  className="inline"
+                >
+                  {consoleConfig.suffix}
+                </motion.span>
+              </AnimatePresence>
             </p>
 
             {/* Mobile: structured 3-col tabs + full-width bottom action row | Desktop: single horizontal row */}

@@ -91,21 +91,43 @@ export const ClosingCtaAndFooter: React.FC<ClosingCtaAndFooterProps> = () => {
             {/* Left Editorial Column (matching reference copy rhythm) */}
             <div className="flex flex-col justify-between lg:col-span-5">
               <div>
-                <p className="text-[13px] font-medium text-white/75">Contacto</p>
-                <h2 className="mt-2.5 text-[30px] font-semibold leading-[1.08] tracking-[-0.025em] text-white sm:text-[40px]">
+                <p
+                  data-reveal
+                  style={{ "--reveal-delay": "0ms" } as React.CSSProperties}
+                  className="text-[13px] font-medium text-white/75"
+                >
+                  Contacto
+                </p>
+                <h2
+                  data-reveal
+                  style={{ "--reveal-delay": "60ms" } as React.CSSProperties}
+                  className="mt-2.5 text-[30px] font-semibold leading-[1.08] tracking-[-0.025em] text-white sm:text-[40px]"
+                >
                   ¿Interesado en nuestra plataforma?
                 </h2>
-                <p className="mt-5 max-w-[360px] text-[13.5px] leading-[1.6] text-white/85">
+                <p
+                  data-reveal
+                  style={{ "--reveal-delay": "120ms" } as React.CSSProperties}
+                  className="mt-5 max-w-[360px] text-[13.5px] leading-[1.6] text-white/85"
+                >
                   Escríbenos para conocer cómo conectar medidores eléctricos inteligentes y automatizar tus reportes ESG en tiempo real.
                 </p>
-                <p className="mt-4 max-w-[360px] text-[13.5px] leading-[1.6] text-white/75">
+                <p
+                  data-reveal
+                  style={{ "--reveal-delay": "170ms" } as React.CSSProperties}
+                  className="mt-4 max-w-[360px] text-[13.5px] leading-[1.6] text-white/75"
+                >
                   Acompañamos despliegues técnicos en zonas francas, hotelería, agroindustria y centros logísticos en Costa Rica y Centroamérica.
                 </p>
               </div>
             </div>
 
             {/* Right Minimalist Underline-Only Form (exact reference field structure) */}
-            <div className="lg:col-span-7">
+            <div
+              data-reveal
+              style={{ "--reveal-delay": "120ms" } as React.CSSProperties}
+              className="lg:col-span-7"
+            >
               {sent ? (
                 <div
                   role="status"
@@ -237,8 +259,12 @@ export const ClosingCtaAndFooter: React.FC<ClosingCtaAndFooterProps> = () => {
             </div>
 
             <div className="grid grid-cols-2 gap-8 sm:grid-cols-3 md:col-span-7">
-              {FOOTER_COLUMNS.map((col) => (
-                <div key={col.heading}>
+              {FOOTER_COLUMNS.map((col, idx) => (
+                <div
+                  key={col.heading}
+                  data-reveal
+                  style={{ "--reveal-delay": `${idx * 60}ms` } as React.CSSProperties}
+                >
                   <h3 className="text-[13px] font-semibold text-[var(--text-primary)]">
                     {col.heading}
                   </h3>
