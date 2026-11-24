@@ -243,10 +243,10 @@ export const TelemetryArchitectureSvg: React.FC<{ className?: string }> = ({
               />
               <path
                 d={topPath}
-                fill={isHovered ? "#1b2b21" : "#191919"}
+                fill={isHovered ? "#182842" : "#191919"}
                 stroke={
                   isHovered
-                    ? "#4ade80"
+                    ? "#60a5fa"
                     : isNeighbor
                       ? "rgba(255,255,255,0.34)"
                       : "rgba(255,255,255,0.22)"
@@ -260,7 +260,7 @@ export const TelemetryArchitectureSvg: React.FC<{ className?: string }> = ({
                   cy={node.cy}
                   rx={node.rx * 0.28}
                   ry={node.ry * 0.28}
-                  stroke={isHovered ? "#4ade80" : "rgba(255,255,255,0.26)"}
+                  stroke={isHovered ? "#60a5fa" : "rgba(255,255,255,0.26)"}
                   strokeWidth="0.85"
                 />
               )}
@@ -271,7 +271,7 @@ export const TelemetryArchitectureSvg: React.FC<{ className?: string }> = ({
                     cy={node.cy}
                     rx={node.rx * 0.34}
                     ry={node.ry * 0.34}
-                    stroke={isHovered ? "#4ade80" : "rgba(255,255,255,0.28)"}
+                    stroke={isHovered ? "#60a5fa" : "rgba(255,255,255,0.28)"}
                     strokeWidth="0.85"
                   />
                   <ellipse
@@ -279,8 +279,8 @@ export const TelemetryArchitectureSvg: React.FC<{ className?: string }> = ({
                     cy={node.cy}
                     rx={node.rx * 0.14}
                     ry={node.ry * 0.14}
-                    fill={isHovered ? "#4ade80" : "none"}
-                    stroke={isHovered ? "#4ade80" : "rgba(255,255,255,0.2)"}
+                    fill={isHovered ? "#60a5fa" : "none"}
+                    stroke={isHovered ? "#60a5fa" : "rgba(255,255,255,0.2)"}
                     strokeWidth="0.75"
                   />
                 </>
@@ -288,7 +288,7 @@ export const TelemetryArchitectureSvg: React.FC<{ className?: string }> = ({
               {node.squarePad && (
                 <path
                   d={`M ${node.cx} ${node.cy - node.ry * 0.4} L ${node.cx + node.rx * 0.4} ${node.cy} L ${node.cx} ${node.cy + node.ry * 0.4} L ${node.cx - node.rx * 0.4} ${node.cy} Z`}
-                  stroke={isHovered ? "#4ade80" : "rgba(255,255,255,0.22)"}
+                  stroke={isHovered ? "#60a5fa" : "rgba(255,255,255,0.22)"}
                   strokeWidth="0.75"
                 />
               )}
@@ -331,7 +331,7 @@ export const TelemetryArchitectureSvg: React.FC<{ className?: string }> = ({
             cx={HUB_CENTER.x}
             cy={HUB_CENTER.y}
             r="2.2"
-            fill={activeId ? "#4ade80" : "rgba(255,255,255,0.35)"}
+            fill={activeId ? "#60a5fa" : "rgba(255,255,255,0.35)"}
           />
         </g>
 
@@ -376,10 +376,10 @@ export const TelemetryArchitectureSvg: React.FC<{ className?: string }> = ({
               />
               <path
                 d={topPath}
-                fill={isHovered ? "#1b2b21" : "#191919"}
+                fill={isHovered ? "#182842" : "#191919"}
                 stroke={
                   isHovered
-                    ? "#4ade80"
+                    ? "#60a5fa"
                     : isNeighbor
                       ? "rgba(255,255,255,0.34)"
                       : "rgba(255,255,255,0.22)"
@@ -393,7 +393,7 @@ export const TelemetryArchitectureSvg: React.FC<{ className?: string }> = ({
                   cy={node.cy}
                   rx={node.rx * 0.28}
                   ry={node.ry * 0.28}
-                  stroke={isHovered ? "#4ade80" : "rgba(255,255,255,0.26)"}
+                  stroke={isHovered ? "#60a5fa" : "rgba(255,255,255,0.26)"}
                   strokeWidth="0.85"
                 />
               )}
@@ -404,7 +404,7 @@ export const TelemetryArchitectureSvg: React.FC<{ className?: string }> = ({
                     cy={node.cy}
                     rx={node.rx * 0.34}
                     ry={node.ry * 0.34}
-                    stroke={isHovered ? "#4ade80" : "rgba(255,255,255,0.28)"}
+                    stroke={isHovered ? "#60a5fa" : "rgba(255,255,255,0.28)"}
                     strokeWidth="0.85"
                   />
                   <ellipse
@@ -412,8 +412,8 @@ export const TelemetryArchitectureSvg: React.FC<{ className?: string }> = ({
                     cy={node.cy}
                     rx={node.rx * 0.14}
                     ry={node.ry * 0.14}
-                    fill={isHovered ? "#4ade80" : "none"}
-                    stroke={isHovered ? "#4ade80" : "rgba(255,255,255,0.2)"}
+                    fill={isHovered ? "#60a5fa" : "none"}
+                    stroke={isHovered ? "#60a5fa" : "rgba(255,255,255,0.2)"}
                     strokeWidth="0.75"
                   />
                 </>
@@ -421,7 +421,7 @@ export const TelemetryArchitectureSvg: React.FC<{ className?: string }> = ({
               {node.squarePad && (
                 <path
                   d={`M ${node.cx} ${node.cy - node.ry * 0.4} L ${node.cx + node.rx * 0.4} ${node.cy} L ${node.cx} ${node.cy + node.ry * 0.4} L ${node.cx - node.rx * 0.4} ${node.cy} Z`}
-                  stroke={isHovered ? "#4ade80" : "rgba(255,255,255,0.22)"}
+                  stroke={isHovered ? "#60a5fa" : "rgba(255,255,255,0.22)"}
                   strokeWidth="0.75"
                 />
               )}
@@ -437,12 +437,12 @@ export const TelemetryArchitectureSvg: React.FC<{ className?: string }> = ({
               y1={activeNode.cy - 10}
               x2={HUB_CENTER.x}
               y2={HUB_CENTER.y - 2}
-              stroke="#4ade80"
+              stroke="#60a5fa"
               strokeWidth="1"
               strokeDasharray="3 3"
               opacity="0.85"
             />
-            <circle cx={activeNode.cx} cy={activeNode.cy - 10} r="2.5" fill="#4ade80" />
+            <circle cx={activeNode.cx} cy={activeNode.cy - 10} r="2.5" fill="#60a5fa" />
           </g>
         )}
       </svg>
@@ -460,9 +460,9 @@ export const TelemetryArchitectureSvg: React.FC<{ className?: string }> = ({
               className="flex items-center justify-between"
             >
               <span className="truncate pr-2 text-[#e4e4e7]">
-                <span className="text-[#4ade80]">[{activeNode.code}]</span> {activeNode.label}
+                <span className="text-[#60a5fa]">[{activeNode.code}]</span> {activeNode.label}
               </span>
-              <span className="shrink-0 text-[#4ade80]">{activeNode.metric}</span>
+              <span className="shrink-0 text-[#60a5fa]">{activeNode.metric}</span>
             </motion.div>
           ) : (
             <motion.div
@@ -505,7 +505,7 @@ export const TelemetryArchitectureSvg: React.FC<{ className?: string }> = ({
               aria-pressed={isSelected}
               className={`rounded-[6px] border px-2.5 py-1.5 text-left font-mono-tech text-[11px] transition-colors duration-150 ${
                 isSelected
-                  ? "border-[#4ade80]/60 bg-[#1b2b21] text-[#4ade80]"
+                  ? "border-[#60a5fa]/60 bg-[#182842] text-[#60a5fa]"
                   : "border-white/10 bg-[#191919] text-[#a1a1aa]"
               }`}
             >

@@ -159,7 +159,7 @@ export const EsgAuditPage: React.FC<EsgAuditPageProps> = ({
             >
               ← Volver al inicio
             </button>
-            <span className="font-mono-tech text-[11.5px] text-[#4ade80]">
+            <span className="font-mono-tech text-[11.5px] text-[#60a5fa]">
               [03] Metodología y auditoría ESG
             </span>
           </div>
@@ -195,12 +195,12 @@ export const EsgAuditPage: React.FC<EsgAuditPageProps> = ({
                       className="flex w-full items-center justify-between py-3.5 text-left transition-colors duration-150 cursor-pointer"
                     >
                       <span className={`text-[14.5px] ${isActive ? "font-medium text-white" : "text-[var(--text-muted)] hover:text-[#d4d4d8]"}`}>
-                        <span className={`mr-2.5 font-mono-tech text-[11px] ${isActive ? "text-[#4ade80]" : ""}`}>
+                        <span className={`mr-2.5 font-mono-tech text-[11px] ${isActive ? "text-[#60a5fa]" : ""}`}>
                           [{item.code}]
                         </span>
                         {item.title}
                       </span>
-                      <span className={`font-mono-tech text-[11px] ${isActive ? "text-[#4ade80]" : "text-[var(--text-muted)]"}`}>
+                      <span className={`font-mono-tech text-[11px] ${isActive ? "text-[#60a5fa]" : "text-[var(--text-muted)]"}`}>
                         {isActive ? "Activo" : "→"}
                       </span>
                     </button>
@@ -217,7 +217,7 @@ export const EsgAuditPage: React.FC<EsgAuditPageProps> = ({
                     exit={{ opacity: 0, y: -8, filter: "blur(3px)" }}
                     transition={{ duration: 0.2, ease: [0.22, 1, 0.36, 1] }}
                   >
-                    <span className="font-mono-tech text-[11px] text-[#4ade80]">
+                    <span className="font-mono-tech text-[11px] text-[#60a5fa]">
                       {activeStratum.standardTag}
                     </span>
                     <p className="mt-2 text-[14px] leading-[1.6] text-[var(--text-secondary)]">
@@ -243,7 +243,7 @@ export const EsgAuditPage: React.FC<EsgAuditPageProps> = ({
                 />
                 <div className="mt-2 flex items-center justify-between border-t border-white/[0.08] pt-3 font-mono-tech text-[11px] text-[var(--text-muted)]">
                   <span>Estrato activo [{activeStratum.code}]</span>
-                  <span className="text-[#4ade80]">{activeStratum.title}</span>
+                  <span className="text-[#60a5fa]">{activeStratum.title}</span>
                 </div>
               </div>
             </div>
@@ -289,7 +289,7 @@ export const EsgAuditPage: React.FC<EsgAuditPageProps> = ({
                   aria-pressed={isActive}
                   className={`rounded-[6px] border px-3 py-2 text-[12px] font-medium transition-colors duration-150 cursor-pointer ${
                     isActive
-                      ? "border-[#4ade80]/60 bg-[#17281e] text-[#4ade80]"
+                      ? "border-[#60a5fa]/60 bg-[#142238] text-[#60a5fa]"
                       : "border-white/12 bg-[#1a1b1b] text-[#a1a1aa] hover:text-white"
                   }`}
                 >
@@ -309,7 +309,7 @@ export const EsgAuditPage: React.FC<EsgAuditPageProps> = ({
                 >
                   Consumo mensual ({activeSource.unit})
                 </label>
-                <span className="font-mono-tech text-[20px] font-semibold text-[#4ade80] tabular-nums">
+                <span className="font-mono-tech text-[20px] font-semibold text-[#60a5fa] tabular-nums">
                   <NumberFlow value={quantity} suffix={` ${activeSource.unit}`} className="nf-number" />
                 </span>
               </div>
@@ -325,7 +325,7 @@ export const EsgAuditPage: React.FC<EsgAuditPageProps> = ({
                   setQuantity(Number(e.target.value));
                   setVerifiedHash(false);
                 }}
-                className="mt-4 h-1.5 w-full cursor-pointer appearance-none rounded-full bg-white/15 accent-[#4ade80]"
+                className="mt-4 h-1.5 w-full cursor-pointer appearance-none rounded-full bg-white/15 accent-[#60a5fa]"
               />
 
               <div className="mt-3 flex justify-between font-mono-tech text-[11px] text-[var(--text-muted)]">
@@ -359,7 +359,7 @@ export const EsgAuditPage: React.FC<EsgAuditPageProps> = ({
                 </div>
                 <div className="flex items-center justify-between py-3.5">
                   <span className="text-[13px] text-[var(--text-secondary)]">Emisiones equivalentes</span>
-                  <span className="font-mono-tech text-[22px] font-semibold text-[#4ade80] tabular-nums">
+                  <span className="font-mono-tech text-[22px] font-semibold text-[#60a5fa] tabular-nums">
                     <NumberFlow
                       value={tonsCo2e}
                       format={{ minimumFractionDigits: 2, maximumFractionDigits: 2 }}
@@ -382,7 +382,7 @@ export const EsgAuditPage: React.FC<EsgAuditPageProps> = ({
                     onClick={() => setVerifiedHash(true)}
                     className={`rounded-[6px] border px-3 py-1.5 font-mono-tech text-[11.5px] transition-colors cursor-pointer ${
                       verifiedHash
-                        ? "border-[#4ade80]/60 bg-[#17281e] text-[#4ade80]"
+                        ? "border-[#60a5fa]/60 bg-[#142238] text-[#60a5fa]"
                         : "border-white/14 bg-[#1a1b1b] text-white hover:border-white/30"
                     }`}
                   >

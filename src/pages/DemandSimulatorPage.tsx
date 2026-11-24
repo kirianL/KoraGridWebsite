@@ -131,7 +131,7 @@ export const DemandSimulatorPage: React.FC<DemandSimulatorPageProps> = ({
             >
               ← Volver al inicio
             </button>
-            <span className="font-mono-tech text-[11.5px] text-[#4ade80]">
+            <span className="font-mono-tech text-[11.5px] text-[#60a5fa]">
               [02] Simulador de demanda punta
             </span>
           </div>
@@ -166,7 +166,7 @@ export const DemandSimulatorPage: React.FC<DemandSimulatorPageProps> = ({
                       aria-pressed={isActive}
                       className={`rounded-[6px] border px-3 py-2 text-[12px] font-medium transition-colors duration-150 cursor-pointer ${
                         isActive
-                          ? "border-[#4ade80]/60 bg-[#17281e] text-[#4ade80]"
+                          ? "border-[#60a5fa]/60 bg-[#142238] text-[#60a5fa]"
                           : "border-white/12 bg-[#1a1b1b] text-[#a1a1aa] hover:text-white"
                       }`}
                     >
@@ -200,7 +200,7 @@ export const DemandSimulatorPage: React.FC<DemandSimulatorPageProps> = ({
           <div className="grid grid-cols-2 divide-x divide-y divide-[var(--border-subtle)] border border-[var(--border-subtle)] lg:hidden">
             <div className="p-4">
               <span className="font-mono-tech text-[10.5px] text-[var(--text-muted)]">Demanda recortada</span>
-              <div className="mt-1.5 font-mono-tech text-[24px] font-semibold text-[#4ade80] tabular-nums">
+              <div className="mt-1.5 font-mono-tech text-[24px] font-semibold text-[#60a5fa] tabular-nums">
                 <NumberFlow value={simulation.shavedKw} suffix=" kW" className="nf-number" />
               </div>
             </div>
@@ -241,7 +241,7 @@ export const DemandSimulatorPage: React.FC<DemandSimulatorPageProps> = ({
                     >
                       Demanda contratada
                     </label>
-                    <span className="font-mono-tech text-[18px] font-semibold text-[#4ade80] tabular-nums">
+                    <span className="font-mono-tech text-[18px] font-semibold text-[#60a5fa] tabular-nums">
                       <NumberFlow value={contractedKw} suffix=" kW" className="nf-number" />
                     </span>
                   </div>
@@ -254,7 +254,7 @@ export const DemandSimulatorPage: React.FC<DemandSimulatorPageProps> = ({
                     step={50}
                     value={contractedKw}
                     onChange={(e) => setContractedKw(Number(e.target.value))}
-                    className="mt-4 h-1.5 w-full cursor-pointer appearance-none rounded-full bg-white/15 accent-[#4ade80]"
+                    className="mt-4 h-1.5 w-full cursor-pointer appearance-none rounded-full bg-white/15 accent-[#60a5fa]"
                   />
 
                   <div className="mt-3 flex items-center justify-between gap-2">
@@ -294,7 +294,7 @@ export const DemandSimulatorPage: React.FC<DemandSimulatorPageProps> = ({
                         aria-pressed={thresholdPct === pct}
                         className={`rounded-[6px] border py-2 font-mono-tech text-[12px] transition-colors duration-150 cursor-pointer ${
                           thresholdPct === pct
-                            ? "border-[#4ade80]/60 bg-[#17281e] text-[#4ade80]"
+                            ? "border-[#60a5fa]/60 bg-[#142238] text-[#60a5fa]"
                             : "border-white/12 bg-[#1a1b1b] text-[#a1a1aa] hover:text-white"
                         }`}
                       >
@@ -322,7 +322,7 @@ export const DemandSimulatorPage: React.FC<DemandSimulatorPageProps> = ({
               <div className="hidden grid-cols-4 divide-x divide-[var(--border-subtle)] border-b border-[var(--border-subtle)] pb-6 lg:grid">
                 <div className="pr-4">
                   <span className="font-mono-tech text-[11px] text-[var(--text-muted)]">Demanda recortada</span>
-                  <div className="mt-1.5 font-mono-tech text-[28px] font-semibold text-[#4ade80] tabular-nums">
+                  <div className="mt-1.5 font-mono-tech text-[28px] font-semibold text-[#60a5fa] tabular-nums">
                     <NumberFlow value={simulation.shavedKw} suffix=" kW" className="nf-number" />
                   </div>
                 </div>
@@ -357,7 +357,7 @@ export const DemandSimulatorPage: React.FC<DemandSimulatorPageProps> = ({
                   <span className="font-mono-tech text-[11.5px] text-[var(--text-primary)]">
                     Perfil horario 24 h · {String(activeHourData.hour).padStart(2, "0")}:00
                   </span>
-                  <p className="mt-0.5 font-mono-tech text-[11px] text-[#4ade80]">
+                  <p className="mt-0.5 font-mono-tech text-[11px] text-[#60a5fa]">
                     {BAND_LABELS[activeHourData.band]} · Base {activeHourData.rawKw} kW → Controlado {activeHourData.controlledKw} kW
                   </p>
                 </div>
@@ -371,7 +371,7 @@ export const DemandSimulatorPage: React.FC<DemandSimulatorPageProps> = ({
                       aria-pressed={activeHourData.band === band}
                       className={`rounded-[6px] border px-2.5 py-1 font-mono-tech text-[10.5px] transition-colors cursor-pointer ${
                         activeHourData.band === band
-                          ? "border-[#4ade80]/60 bg-[#17281e] text-[#4ade80]"
+                          ? "border-[#60a5fa]/60 bg-[#142238] text-[#60a5fa]"
                           : "border-white/10 bg-[#1a1b1b] text-[#a1a1aa]"
                       }`}
                     >
@@ -410,9 +410,9 @@ export const DemandSimulatorPage: React.FC<DemandSimulatorPageProps> = ({
                           style={{ height: `${ctrlPct}%` }}
                           className={`relative z-10 w-full rounded-t-[2px] transition-colors duration-150 ${
                             isSelected
-                              ? "bg-[#4ade80]"
+                              ? "bg-[#60a5fa]"
                               : isPeak
-                                ? "bg-[#22c55e]/60 group-hover:bg-[#4ade80]"
+                                ? "bg-[#3b82f6]/60 group-hover:bg-[#60a5fa]"
                                 : "bg-white/25 group-hover:bg-white/45"
                           }`}
                         />

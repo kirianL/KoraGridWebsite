@@ -15,7 +15,7 @@ export const KoraGridLogo: React.FC<IconProps> = ({ className = "h-6 w-6" }) => 
     <rect x="9.75" y="2" width="4.5" height="4.5" rx="1" fill="currentColor" opacity="0.55" />
     <rect x="17.5" y="2" width="4.5" height="4.5" rx="1" fill="currentColor" />
     <rect x="2" y="9.75" width="4.5" height="4.5" rx="1" fill="currentColor" opacity="0.55" />
-    <rect x="9.75" y="9.75" width="4.5" height="4.5" rx="1" fill="#22c55e" />
+    <rect x="9.75" y="9.75" width="4.5" height="4.5" rx="1" fill="#3b82f6" />
     <rect x="17.5" y="9.75" width="4.5" height="4.5" rx="1" fill="currentColor" opacity="0.55" />
     <rect x="2" y="17.5" width="4.5" height="4.5" rx="1" fill="currentColor" />
     <rect x="9.75" y="17.5" width="4.5" height="4.5" rx="1" fill="currentColor" opacity="0.55" />
@@ -147,14 +147,14 @@ export const PillarRadialIcon: React.FC<IconProps> = ({ className = "h-10 w-10" 
   <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" aria-hidden="true" className={className}>
     <path d="M20 6v8M20 26v8M6 20h8M26 20h8" />
     <path d="M10.1 10.1l5.6 5.6M24.3 24.3l5.6 5.6M29.9 10.1l-5.6 5.6M15.7 24.3l-5.6 5.6" />
-    <circle cx="20" cy="20" r="2.5" fill="#4ade80" stroke="none" />
+    <circle cx="20" cy="20" r="2.5" fill="#60a5fa" stroke="none" />
   </svg>
 );
 
 export const PillarLayersIcon: React.FC<IconProps> = ({ className = "h-10 w-10" }) => (
   <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinejoin="round" aria-hidden="true" className={className}>
     <path d="M20 8l12 6.5L20 21 8 14.5 20 8Z" />
-    <path d="M8 21.5L20 28l12-6.5" stroke="#4ade80" />
+    <path d="M8 21.5L20 28l12-6.5" stroke="#60a5fa" />
     <path d="M8 27.5L20 34l12-6.5" opacity="0.65" />
   </svg>
 );
@@ -163,7 +163,7 @@ export const PillarBarsIcon: React.FC<IconProps> = ({ className = "h-10 w-10" })
   <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" aria-hidden="true" className={className}>
     <path d="M10 26l4-10" opacity="0.55" />
     <path d="M16 28l5-16" />
-    <path d="M22 25l4-11" stroke="#4ade80" />
+    <path d="M22 25l4-11" stroke="#60a5fa" />
     <path d="M28 28l4-14" opacity="0.8" />
   </svg>
 );

@@ -99,7 +99,7 @@ export const ContextualPrecisionCarousel: React.FC<ContextualPrecisionCarouselPr
               transition={{ duration: 0.24, ease: [0.16, 1, 0.3, 1] }}
             >
               <p className="mt-3 max-w-[920px] text-[23px] font-normal leading-[1.28] tracking-[-0.02em] text-[#6f7472] sm:mt-4 sm:text-[40px] sm:leading-[1.22]">
-                <span className="text-[#4ade80]">{current.highlighted}</span> {current.rest}
+                <span className="text-[#60a5fa]">{current.highlighted}</span> {current.rest}
               </p>
             </motion.div>
           </AnimatePresence>

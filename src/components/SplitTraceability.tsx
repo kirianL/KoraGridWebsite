@@ -97,7 +97,7 @@ export const SplitTraceability: React.FC<SplitTraceabilityProps> = ({ onOpenDemo
                     <span
                       className={`mx-0.5 inline-flex h-[18px] w-[18px] -translate-y-[1px] items-center justify-center rounded-[3px] border font-mono-tech text-[10.5px] align-middle sm:h-[19px] sm:w-[19px] sm:text-[11px] ${
                         isSelected
-                          ? "border-[#84a955]/70 bg-[#84a955]/20 text-[#d9f99d]"
+                          ? "border-[#60a5fa]/70 bg-[#3b82f6]/20 text-[#bfdbfe]"
                           : "border-white/12 bg-white/[0.06] text-[#8a8f8d]"
                       }`}
                     >
@@ -119,7 +119,7 @@ export const SplitTraceability: React.FC<SplitTraceabilityProps> = ({ onOpenDemo
         >
           <img
             src="/images/split-emerald-field.png"
-            alt="Campo cromático verde esmeralda de telemetría KoraGrid"
+            alt="Campo cromático azul cobalto de telemetría KoraGrid"
             width={1024}
             height={1024}
             className="pointer-events-none absolute inset-0 h-full w-full object-cover select-none"
@@ -134,9 +134,9 @@ export const SplitTraceability: React.FC<SplitTraceabilityProps> = ({ onOpenDemo
                 animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
                 exit={{ opacity: 0, y: -8, filter: "blur(3px)" }}
                 transition={{ duration: 0.22, ease: [0.16, 1, 0.3, 1] }}
-                className="text-[19px] font-normal leading-[1.45] tracking-[-0.01em] text-[#092616] sm:text-[22px]"
+                className="text-[19px] font-normal leading-[1.45] tracking-[-0.01em] text-[#071636] sm:text-[22px]"
               >
-                <span className="mr-2 inline-block rounded-[4px] bg-white/80 px-2 py-0.5 font-medium text-[#062413] backdrop-blur-sm">
+                <span className="mr-2 inline-block rounded-[4px] bg-white/80 px-2 py-0.5 font-medium text-[#08193d] backdrop-blur-sm">
                   [{current.tag}]
                 </span>
                 {current.cardText}

@@ -101,9 +101,9 @@ export const RegionalTelemetryMap: React.FC<RegionalTelemetryMapProps> = ({
                 <path
                   key={c.key}
                   d={c.d}
-                  fill={c.isCostaRica ? "#1e6b3f" : "#1f2221"}
+                  fill={c.isCostaRica ? "#1e40af" : "#1f2221"}
                   fillOpacity={c.isCostaRica ? 1 : 0.85}
-                  stroke={c.isCostaRica ? "#4ade80" : "#141414"}
+                  stroke={c.isCostaRica ? "#60a5fa" : "#141414"}
                   strokeWidth={c.isCostaRica ? 1.4 : 0.8}
                 />
               ))}

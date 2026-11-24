@@ -149,7 +149,7 @@ export const HeroTelemetry: React.FC<HeroTelemetryProps> = ({ onOpenDemo }) => {
                 format={{ minimumFractionDigits: 1, maximumFractionDigits: 1 }}
                 suffix=" kW"
                 trend={1}
-                className="nf-number font-semibold text-[#4ade80]"
+                className="nf-number font-semibold text-[#60a5fa]"
               />{" "}
               <AnimatePresence mode="wait">
                 <motion.span
@@ -206,7 +206,7 @@ export const HeroTelemetry: React.FC<HeroTelemetryProps> = ({ onOpenDemo }) => {
 
               <div className="flex items-center justify-between gap-2 border-t border-white/10 pt-2.5 sm:shrink-0 sm:justify-end sm:border-t-0 sm:pt-0">
                 <span className="inline-flex h-7 items-center gap-1.5 whitespace-nowrap rounded-[6px] border border-white/10 bg-white/[0.06] px-2.5 text-[11px] text-[#e4e4e7] backdrop-blur-md">
-                  <GlobeIcon className="h-3 w-3 text-[#4ade80]" />
+                  <GlobeIcon className="h-3 w-3 text-[#60a5fa]" />
                   <span>Costa Rica</span>
                 </span>
 

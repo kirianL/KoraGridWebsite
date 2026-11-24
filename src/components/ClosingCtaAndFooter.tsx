@@ -30,7 +30,7 @@ export const ClosingCtaAndFooter: React.FC<ClosingCtaAndFooterProps> = ({ onNavi
           className="relative overflow-hidden rounded-t-[18px] sm:rounded-t-[24px]"
           style={{
             background:
-              "radial-gradient(ellipse 58% 68% at 14% 42%, rgba(110, 231, 183, 0.32) 0%, transparent 62%), radial-gradient(ellipse 46% 58% at 54% 12%, rgba(167, 243, 208, 0.22) 0%, transparent 60%), radial-gradient(ellipse 52% 65% at 88% 72%, rgba(52, 211, 153, 0.24) 0%, transparent 64%), linear-gradient(135deg, #115834 0%, #156d40 42%, #0e4a2b 76%, #135c36 100%)",
+              "radial-gradient(ellipse 58% 68% at 14% 42%, rgba(96, 165, 250, 0.34) 0%, transparent 62%), radial-gradient(ellipse 46% 58% at 54% 12%, rgba(147, 197, 253, 0.24) 0%, transparent 60%), radial-gradient(ellipse 52% 65% at 88% 72%, rgba(59, 130, 246, 0.26) 0%, transparent 64%), linear-gradient(135deg, #163b8a 0%, #1d4ed8 42%, #133378 76%, #18429c 100%)",
           }}
         >
           {/* Dual-frequency SVG filters: coarse organic watercolor wash + fine matte cyanotype grain */}
@@ -50,7 +50,7 @@ export const ClosingCtaAndFooter: React.FC<ClosingCtaAndFooterProps> = ({ onNavi
                 />
                 <feColorMatrix
                   type="matrix"
-                  values="0 0 0 0 0.72  0 0 0 0 0.96  0 0 0 0 0.84  0 0 0 0.28 0"
+                  values="0 0 0 0 0.72  0 0 0 0 0.84  0 0 0 0 0.99  0 0 0 0.28 0"
                   in="clouds"
                 />
               </filter>
@@ -85,7 +85,7 @@ export const ClosingCtaAndFooter: React.FC<ClosingCtaAndFooterProps> = ({ onNavi
             className="pointer-events-none absolute inset-0 opacity-45"
             style={{
               background:
-                "linear-gradient(122deg, rgba(209, 250, 229, 0.22) 0%, transparent 24%, rgba(255, 255, 255, 0.1) 46%, transparent 62%, rgba(16, 185, 129, 0.14) 84%, transparent 100%)",
+                "linear-gradient(122deg, rgba(191, 219, 254, 0.22) 0%, transparent 24%, rgba(255, 255, 255, 0.1) 46%, transparent 62%, rgba(59, 130, 246, 0.14) 84%, transparent 100%)",
             }}
           />
 
@@ -151,7 +151,7 @@ export const ClosingCtaAndFooter: React.FC<ClosingCtaAndFooterProps> = ({ onNavi
                         setSubject("");
                         setMessage("");
                       }}
-                      className="rounded-[6px] bg-white px-4 py-2 text-[12.5px] font-semibold text-[#0b2919] transition-colors duration-150 hover:bg-white/90 cursor-pointer"
+                      className="rounded-[6px] bg-white px-4 py-2 text-[12.5px] font-semibold text-[#0c1e4a] transition-colors duration-150 hover:bg-white/90 cursor-pointer"
                     >
                       Enviar otra consulta
                     </button>
@@ -234,7 +234,7 @@ export const ClosingCtaAndFooter: React.FC<ClosingCtaAndFooterProps> = ({ onNavi
                   <div className="flex justify-end pt-1">
                     <button
                       type="submit"
-                      className="w-full rounded-[6px] bg-white px-5 py-2.5 text-[13px] font-semibold text-[#0b2919] transition-colors duration-150 hover:bg-white/90 sm:w-auto cursor-pointer"
+                      className="w-full rounded-[6px] bg-white px-5 py-2.5 text-[13px] font-semibold text-[#0c1e4a] transition-colors duration-150 hover:bg-white/90 sm:w-auto cursor-pointer"
                     >
                       Enviar mensaje
                     </button>

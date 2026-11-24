@@ -9,12 +9,12 @@
   --bg-light-canvas: #ffffff;
   --bg-light-subtle: #f8faf9;
 
-  /* Emerald & Lime Accents (Ref 1 & Ref 3) */
-  --accent-emerald: #22c55e;
-  --accent-emerald-deep: #15803d;
-  --accent-lime: #84e174;
-  --accent-mint: #4ade80;
-  --accent-soft-tint: rgba(34, 197, 94, 0.12);
+  /* Cobalt & Sapphire Blue Accents */
+  --accent-emerald: #3b82f6;
+  --accent-emerald-deep: #1d4ed8;
+  --accent-lime: #93c5fd;
+  --accent-mint: #60a5fa;
+  --accent-soft-tint: rgba(59, 130, 246, 0.12);
 
   /* Text Hierarchy */
   --text-primary: #f5f7f6;

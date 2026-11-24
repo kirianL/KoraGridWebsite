@@ -153,7 +153,7 @@ export const HardwareTelemetryPage: React.FC<HardwareTelemetryPageProps> = ({
             >
               ← Volver al inicio
             </button>
-            <span className="font-mono-tech text-[11.5px] text-[#4ade80]">
+            <span className="font-mono-tech text-[11.5px] text-[#60a5fa]">
               [01] Arquitectura física en planta
             </span>
           </div>
@@ -191,7 +191,7 @@ export const HardwareTelemetryPage: React.FC<HardwareTelemetryPageProps> = ({
                       aria-pressed={isActive}
                       className={`shrink-0 rounded-[6px] border px-3 py-2 font-mono-tech text-[11.5px] transition-colors duration-150 cursor-pointer ${
                         isActive
-                          ? "border-[#4ade80]/60 bg-[#17281e] text-[#4ade80]"
+                          ? "border-[#60a5fa]/60 bg-[#142238] text-[#60a5fa]"
                           : "border-white/12 bg-[#1a1b1b] text-[#a1a1aa]"
                       }`}
                     >
@@ -204,7 +204,7 @@ export const HardwareTelemetryPage: React.FC<HardwareTelemetryPageProps> = ({
               {/* Active Hotspot Detail Readout */}
               <div className="mt-6 border-t border-[var(--border-subtle)] pt-6">
                 <div className="flex items-baseline justify-between gap-4">
-                  <span className="font-mono-tech text-[11.5px] text-[#4ade80]">
+                  <span className="font-mono-tech text-[11.5px] text-[#60a5fa]">
                     [{activeSpot.code}] {activeSpot.metricLabel}
                   </span>
                   <div className="font-mono-tech text-[28px] font-semibold tracking-tight text-[var(--text-primary)] tabular-nums sm:text-[34px]">
@@ -233,7 +233,7 @@ export const HardwareTelemetryPage: React.FC<HardwareTelemetryPageProps> = ({
                       <h2 className="text-[19px] font-medium tracking-[-0.015em] text-[var(--text-primary)]">
                         {activeSpot.title}
                       </h2>
-                      <p className="mt-1 text-[13px] text-[#4ade80]/90">{activeSpot.subtitle}</p>
+                      <p className="mt-1 text-[13px] text-[#60a5fa]/90">{activeSpot.subtitle}</p>
                       <p className="mt-2.5 text-[13.5px] leading-[1.6] text-[var(--text-secondary)]">
                         {activeSpot.detail}
                       </p>
@@ -255,7 +255,7 @@ export const HardwareTelemetryPage: React.FC<HardwareTelemetryPageProps> = ({
                         }`}
                       >
                         <span className="text-[13.5px]">
-                          <span className={`mr-2.5 font-mono-tech text-[11px] ${isActive ? "text-[#4ade80]" : ""}`}>
+                          <span className={`mr-2.5 font-mono-tech text-[11px] ${isActive ? "text-[#60a5fa]" : ""}`}>
                             [{spot.code}]
                           </span>
                           {spot.title}
@@ -291,12 +291,12 @@ export const HardwareTelemetryPage: React.FC<HardwareTelemetryPageProps> = ({
                   <polyline
                     points={`${activeSpot.pinX},${activeSpot.pinY} ${Math.max(4, activeSpot.pinX - 18)},${activeSpot.pinY} 0,${activeSpot.pinY}`}
                     fill="none"
-                    stroke="#4ade80"
+                    stroke="#60a5fa"
                     strokeWidth="0.45"
                     strokeDasharray="1.5 1.5"
                     opacity="0.85"
                   />
-                  <circle cx={activeSpot.pinX} cy={activeSpot.pinY} r="1.4" fill="#4ade80" />
+                  <circle cx={activeSpot.pinX} cy={activeSpot.pinY} r="1.4" fill="#60a5fa" />
                 </svg>
 
                 {/* Interactive hardware inspection pins */}
@@ -312,7 +312,7 @@ export const HardwareTelemetryPage: React.FC<HardwareTelemetryPageProps> = ({
                       style={{ left: `${spot.pinX}%`, top: `${spot.pinY}%` }}
                       className={`absolute -translate-x-1/2 -translate-y-1/2 flex h-10 w-10 items-center justify-center rounded-[6px] border font-mono-tech text-[11px] transition-all duration-150 cursor-pointer ${
                         isActive
-                          ? "border-[#4ade80] bg-[#13311f]/95 text-[#4ade80] scale-105 shadow-[0_0_0_4px_rgba(74,222,128,0.16)]"
+                          ? "border-[#60a5fa] bg-[#132644]/95 text-[#60a5fa] scale-105 shadow-[0_0_0_4px_rgba(96,165,250,0.18)]"
                           : "border-white/25 bg-[#141414]/85 text-[#e4e4e7] hover:border-white/50"
                       }`}
                     >
@@ -366,7 +366,7 @@ export const HardwareTelemetryPage: React.FC<HardwareTelemetryPageProps> = ({
                 onClick={() => setTransientActive((prev) => !prev)}
                 className={`inline-flex items-center gap-1.5 rounded-[6px] px-3.5 py-1.5 text-[12px] font-semibold transition-colors duration-150 cursor-pointer ${
                   transientActive
-                    ? "bg-[#4ade80] text-[#092616]"
+                    ? "bg-[#60a5fa] text-[#091936]"
                     : "bg-white text-[#111111] hover:bg-[#e5e5e5]"
                 }`}
               >
@@ -392,7 +392,7 @@ export const HardwareTelemetryPage: React.FC<HardwareTelemetryPageProps> = ({
             </div>
             <div className="p-4 sm:p-6">
               <span className="font-mono-tech text-[11px] text-[var(--text-muted)]">Factor de potencia</span>
-              <div className="mt-2 font-mono-tech text-[24px] font-medium text-[#4ade80] tabular-nums sm:text-[30px]">
+              <div className="mt-2 font-mono-tech text-[24px] font-medium text-[#60a5fa] tabular-nums sm:text-[30px]">
                 <NumberFlow value={readings.powerFactor} format={{ minimumFractionDigits: 2, maximumFractionDigits: 2 }} className="nf-number" />
               </div>
             </div>
@@ -414,7 +414,7 @@ export const HardwareTelemetryPage: React.FC<HardwareTelemetryPageProps> = ({
                 aria-label="Forma de onda trifásica en tiempo real de subestación"
               >
                 <line x1="0" y1="64" x2="600" y2="64" stroke="rgba(255,255,255,0.08)" strokeDasharray="3 3" />
-                <path d={wavePaths.l1} fill="none" stroke="#4ade80" strokeWidth="1.6" />
+                <path d={wavePaths.l1} fill="none" stroke="#60a5fa" strokeWidth="1.6" />
                 <path d={wavePaths.l2} fill="none" stroke="#9ca3af" strokeWidth="1.2" opacity="0.6" />
                 <path d={wavePaths.l3} fill="none" stroke="#52525b" strokeWidth="1.2" opacity="0.6" />
               </svg>
@@ -423,7 +423,7 @@ export const HardwareTelemetryPage: React.FC<HardwareTelemetryPageProps> = ({
                 <button
                   type="button"
                   onClick={onOpenDemo}
-                  className="text-[#4ade80] transition-colors hover:text-white cursor-pointer"
+                  className="text-[#60a5fa] transition-colors hover:text-white cursor-pointer"
                 >
                   Agendar prueba en tablero →
                 </button>

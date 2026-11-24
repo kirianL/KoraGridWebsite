@@ -103,8 +103,8 @@ export const Navbar: React.FC<NavbarProps> = ({
                     aria-current={isActive ? "page" : undefined}
                     className={`whitespace-nowrap font-mono-tech text-[11.5px] transition-colors duration-150 ${
                       isActive
-                        ? "text-[#4ade80]"
-                        : "text-[#d4d4d8] hover:text-[#4ade80]"
+                        ? "text-[#60a5fa]"
+                        : "text-[#d4d4d8] hover:text-[#60a5fa]"
                     }`}
                   >
                     {page.label}
@@ -171,11 +171,11 @@ export const Navbar: React.FC<NavbarProps> = ({
                   onClick={(e) => handleRouteClick(e, page.route)}
                   aria-current={isActive ? "page" : undefined}
                   className={`flex min-h-[54px] items-center justify-between py-3 text-[17px] font-normal tracking-[-0.01em] transition-colors duration-150 ${
-                    isActive ? "text-[#4ade80]" : "text-[#e4e4e7] active:text-[#4ade80]"
+                    isActive ? "text-[#60a5fa]" : "text-[#e4e4e7] active:text-[#60a5fa]"
                   }`}
                 >
                   <span className="flex items-center gap-3">
-                    <span className="font-mono-tech text-[11px] text-[#4ade80]/90">
+                    <span className="font-mono-tech text-[11px] text-[#60a5fa]/90">
                       0{idx + 1}
                     </span>
                     <span>{page.label}</span>
@@ -191,7 +191,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                 href={link.href}
                 tabIndex={mobileOpen ? 0 : -1}
                 onClick={(e) => handleHomeAnchor(e, link.href)}
-                className="flex min-h-[50px] items-center justify-between py-2.5 text-[15.5px] font-normal tracking-[-0.01em] text-[#a1a1aa] transition-colors duration-150 active:text-[#4ade80]"
+                className="flex min-h-[50px] items-center justify-between py-2.5 text-[15.5px] font-normal tracking-[-0.01em] text-[#a1a1aa] transition-colors duration-150 active:text-[#60a5fa]"
               >
                 <span className="flex items-center gap-3">
                   <span className="font-mono-tech text-[11px] text-[#71717a]">
