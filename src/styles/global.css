@@ -1,0 +1,74 @@
+@import "tailwindcss";
+@import "./tokens.css";
+
+@layer base {
+  html {
+    background-color: #141414;
+    color: var(--text-primary);
+    color-scheme: dark;
+    font-family: var(--font-sans);
+    scroll-behavior: smooth;
+    scroll-padding-top: calc(56px + env(safe-area-inset-top));
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    margin: 0;
+    background-color: #141414;
+    color: var(--text-primary);
+    overflow-x: clip;
+  }
+
+  button,
+  a {
+    -webkit-tap-highlight-color: transparent;
+  }
+}
+
+.tabular-nums {
+  font-variant-numeric: tabular-nums;
+}
+
+.font-mono-tech {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+}
+
+/* Continuous 1px architectural rails (Ref 1 & Ref 2) */
+.rail-container {
+  width: 100%;
+  max-width: var(--rail-max-width);
+  margin-inline: auto;
+  border-left: 1px solid var(--border-subtle);
+  border-right: 1px solid var(--border-subtle);
+}
+
+.rail-container-light {
+  width: 100%;
+  max-width: var(--rail-max-width);
+  margin-inline: auto;
+  border-left: 1px solid var(--border-light-subtle);
+  border-right: 1px solid var(--border-light-subtle);
+}
+
+/* Vertical-hatch structural divider band (Ref 1 & Ref 2) */
+.vertical-hatch-band {
+  height: 48px;
+  background-color: var(--bg-canvas);
+  background-image: repeating-linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.055) 0 1px,
+    transparent 1px 6px
+  );
+  border-top: 1px solid var(--border-subtle);
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+@media (max-width: 767px) {
+  .rail-container,
+  .rail-container-light {
+    border-left: none;
+    border-right: none;
+  }
+}

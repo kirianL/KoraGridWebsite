@@ -1,0 +1,47 @@
+:root {
+  /* Dark Canvas & Surfaces (Ref 1 & Ref 2) */
+  --bg-canvas: #141414;
+  --bg-surface-primary: #141414;
+  --bg-surface-elevated: #1c1e1d;
+  --bg-surface-interactive: #232625;
+
+  /* Light Contrast Surface (Ref 3) */
+  --bg-light-canvas: #ffffff;
+  --bg-light-subtle: #f8faf9;
+
+  /* Emerald & Lime Accents (Ref 1 & Ref 3) */
+  --accent-emerald: #22c55e;
+  --accent-emerald-deep: #15803d;
+  --accent-lime: #84e174;
+  --accent-mint: #4ade80;
+  --accent-soft-tint: rgba(34, 197, 94, 0.12);
+
+  /* Text Hierarchy */
+  --text-primary: #f5f7f6;
+  --text-secondary: #9ca3af;
+  --text-muted: #8b8b94;
+  --text-on-light-primary: #111827;
+  --text-on-light-secondary: #4b5563;
+
+  /* Hairline Borders & Structural Rails */
+  --border-subtle: rgba(255, 255, 255, 0.08);
+  --border-strong: rgba(255, 255, 255, 0.16);
+  --border-light-subtle: #e5e7eb;
+  --border-light-strong: #d1d5db;
+
+  /* Typography */
+  --font-sans: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  /* Layout & Radii */
+  --rail-max-width: 1060px;
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-pill: 9999px;
+
+  /* Motion */
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --duration-fast: 150ms;
+  --duration-base: 220ms;
+}
