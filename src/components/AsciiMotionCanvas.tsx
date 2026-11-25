@@ -95,15 +95,15 @@ float smin(float a, float b, float k) {
 
 float sdLoadPulse(vec3 p, float t) {
   vec3 q = p;
-  q.xz *= rot2(t * 0.55);
-  q.xy *= rot2(sin(t * 0.35) * 0.22 + 0.12);
+  q.xz *= rot2(t * 0.3926991);
+  q.xy *= rot2(sin(t * 0.7853982) * 0.20 + 0.12);
 
-  // Subtle breathing pulse
-  float pulse = 1.0 + 0.05 * sin(t * 1.4);
+  // Subtle breathing pulse (8s period)
+  float pulse = 1.0 + 0.045 * sin(t * 0.7853982);
   float r = 0.92 * pulse;
   float thick = 0.085;
 
-  // 6 symmetric 3D rays through the origin = 12-point starburst (exact SDF)
+  // 6 symmetric 3D rays through the origin = 12-point starburst (exact SDF, 180-deg Y symmetric)
   float d = sdCapsule(q, vec3(-r, 0.0, 0.0), vec3(r, 0.0, 0.0), thick);
   d = smin(d, sdCapsule(q, vec3(0.0, -r, 0.0), vec3(0.0, r, 0.0), thick), 0.14);
   d = smin(d, sdCapsule(q, vec3(0.0, 0.0, -r), vec3(0.0, 0.0, r), thick), 0.14);
@@ -120,12 +120,12 @@ float sdLoadPulse(vec3 p, float t) {
 
 float sdAuditTorus(vec3 p, float t) {
   vec3 q = p;
-  q.xz *= rot2(t * 0.50);
-  q.xy *= rot2(sin(t * 0.35) * 0.28 + 0.42);
+  q.xz *= rot2(t * 0.3926991);
+  q.xy *= rot2(sin(t * 0.7853982) * 0.24 + 0.42);
 
-  // Subtle traveling telemetry wave along the ring, keeping the center hole clean
+  // Subtle traveling telemetry wave along the ring (8s period), keeping the center hole clean
   float ang = atan(q.y, q.x);
-  float wave = sin(ang * 4.0 + t * 1.4) * 0.025;
+  float wave = sin(ang * 4.0 + t * 0.7853982) * 0.025;
   float minorR = 0.25 + wave;
   float majorR = 0.72;
 
@@ -405,8 +405,13 @@ export const AsciiMotionCanvas: React.FC<AsciiMotionCanvasProps> = ({
     const prefersReduced =
       typeof window !== "undefined" &&
       window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
+    const forceAnimate =
+      typeof window !== "undefined" &&
+      new URLSearchParams(window.location.search).get("animate") === "1";
     const isAutomatedCapture =
-      typeof navigator !== "undefined" && Boolean(navigator.webdriver);
+      !forceAnimate &&
+      typeof navigator !== "undefined" &&
+      Boolean(navigator.webdriver);
 
     const vs = compileShader(gl, gl.VERTEX_SHADER, VERT_SHADER);
     const fs = compileShader(gl, gl.FRAGMENT_SHADER, FRAG_SHADER);
@@ -581,11 +586,20 @@ export const AsciiMotionCanvas: React.FC<AsciiMotionCanvasProps> = ({
           rafId = 0;
           return;
         }
-        drawFrame(t);
+        const manualTime = (window as unknown as { __asciiTimeMs?: number }).__asciiTimeMs;
+        drawFrame(typeof manualTime === "number" ? manualTime : t);
         rafId = window.requestAnimationFrame(loop);
       };
       rafId = window.requestAnimationFrame(loop);
     };
+
+    const onManualTick = () => {
+      const manualTime = (window as unknown as { __asciiTimeMs?: number }).__asciiTimeMs;
+      if (typeof manualTime === "number" && mediaReady) {
+        drawFrame(manualTime);
+      }
+    };
+    window.addEventListener("ascii-tick", onManualTick);
 
     const stopLoop = () => {
       if (rafId) {
@@ -639,6 +653,7 @@ export const AsciiMotionCanvas: React.FC<AsciiMotionCanvasProps> = ({
       io.disconnect();
       resizeObserver.disconnect();
       document.removeEventListener("visibilitychange", onVisibilityChange);
+      window.removeEventListener("ascii-tick", onManualTick);
       container.removeEventListener("pointermove", onPointerMove);
       container.removeEventListener("pointerleave", onPointerLeave);
       if (sourceTex) gl.deleteTexture(sourceTex);
@@ -652,7 +667,7 @@ export const AsciiMotionCanvas: React.FC<AsciiMotionCanvasProps> = ({
   return (
     <div
       ref={containerRef}
-      className={`relative h-full w-full overflow-hidden ${
+      className={`relative h-full w-full touch-pan-y overflow-hidden ${
         theme === "light" ? "bg-white" : "bg-[#0a0b0e]"
       } ${className}`}
     >

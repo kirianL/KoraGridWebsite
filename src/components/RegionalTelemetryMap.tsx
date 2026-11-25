@@ -58,14 +58,14 @@ export const RegionalTelemetryMap: React.FC<RegionalTelemetryMapProps> = ({
           <h2
             data-reveal
             style={{ "--reveal-delay": "0ms" } as React.CSSProperties}
-            className="text-[28px] font-normal leading-[1.12] tracking-[-0.025em] text-[var(--text-primary)] sm:text-[38px]"
+            className="text-balance font-sans text-[30px] font-normal leading-[1.2] tracking-[-0.025em] text-[var(--text-primary)] sm:text-[40px] sm:leading-[48px]"
           >
             {isEn ? "National coverage in Costa Rica" : "Operación nacional en Costa Rica"}
           </h2>
           <p
             data-reveal
             style={{ "--reveal-delay": "75ms" } as React.CSSProperties}
-            className="mt-3.5 max-w-[390px] text-[14px] leading-[1.6] text-[var(--text-secondary)] sm:mt-4 sm:text-[14.5px]"
+            className="mt-3.5 max-w-[400px] text-pretty text-[14px] leading-[1.6] text-[var(--text-secondary)] sm:mt-4 sm:text-[14.5px]"
           >
             {isEn
               ? "Energy telemetry and environmental auditing deployed across Free Trade Zones, hospitality, agribusiness, and logistics centers nationwide, scaling into Central America."
@@ -106,19 +106,13 @@ export const RegionalTelemetryMap: React.FC<RegionalTelemetryMapProps> = ({
                   key={c.key}
                   d={c.d}
                   fill={c.isCostaRica ? "#1e40af" : "#1f2221"}
-                  fillOpacity={c.isCostaRica ? 1 : 0.85}
+                  fillOpacity={1}
                   stroke={c.isCostaRica ? "#60a5fa" : "#141414"}
                   strokeWidth={c.isCostaRica ? 1.4 : 0.8}
                 />
               ))}
             </g>
           </svg>
-
-          {/* Subtle left gradient blend into editorial column */}
-          <div
-            aria-hidden="true"
-            className="pointer-events-none absolute inset-y-0 left-0 hidden w-16 bg-gradient-to-r from-[#141414] to-transparent lg:block"
-          />
         </div>
       </div>
     </section>

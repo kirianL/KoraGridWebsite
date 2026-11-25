@@ -59,14 +59,14 @@ export const HeroTelemetry: React.FC<HeroTelemetryProps> = ({ onOpenDemo }) => {
           <h1
             data-reveal
             style={{ "--reveal-delay": "0ms" } as React.CSSProperties}
-            className="text-[31px] font-normal leading-[1.08] tracking-[-0.03em] text-[var(--text-primary)] sm:text-[50px] font-[family-name:var(--font-heading)]"
+            className="text-balance text-[31px] font-normal leading-[1.08] tracking-[-0.03em] text-[var(--text-primary)] sm:text-[50px] font-[family-name:var(--font-heading)]"
           >
             {hero.title}
           </h1>
           <p
             data-reveal
             style={{ "--reveal-delay": "70ms" } as React.CSSProperties}
-            className="mx-auto mt-3.5 max-w-[580px] text-[16px] font-normal leading-[25px] text-[#79716b] sm:mt-4 sm:text-[20px] sm:leading-[30px]"
+            className="mx-auto mt-3.5 max-w-[600px] text-pretty text-[16px] font-normal leading-[25px] text-[#79716b] sm:mt-4 sm:text-[20px] sm:leading-[30px]"
           >
             {hero.subtitle}
           </p>

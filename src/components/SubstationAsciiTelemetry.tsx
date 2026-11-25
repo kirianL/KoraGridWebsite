@@ -100,15 +100,15 @@ export const SubstationAsciiTelemetry: React.FC<SubstationAsciiTelemetryProps> =
       aria-labelledby="modelado-heading"
       className="border-t border-[var(--border-light-subtle)] bg-[var(--bg-light-subtle)] text-[var(--text-on-light-primary)]"
     >
-      <div className="mx-auto max-w-[1060px] px-5 py-16 sm:px-8 lg:px-10 lg:py-24">
-        <div className="max-w-[620px]" data-reveal>
+      <div className="rail-container-light px-5 py-16 sm:px-8 lg:px-10 lg:py-24">
+        <div className="max-w-[640px]" data-reveal>
           <h2
             id="modelado-heading"
-            className="text-[clamp(1.75rem,3.2vw,2.45rem)] font-medium leading-[1.12] tracking-tight text-[var(--text-on-light-primary)]"
+            className="text-balance font-sans text-[30px] font-normal leading-[1.2] tracking-[-0.025em] text-[#292524] sm:text-[40px] sm:leading-[48px]"
           >
             {copy.heading}
           </h2>
-          <p className="mt-3 text-[15px] leading-[1.6] text-[var(--text-on-light-secondary)]">
+          <p className="mt-3 text-pretty text-[15px] leading-[1.6] text-[var(--text-on-light-secondary)]">
             {copy.subtitle}
           </p>
         </div>

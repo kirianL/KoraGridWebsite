@@ -58,14 +58,14 @@ export const LightChallengesSection: React.FC = () => {
           <h2
             data-reveal
             style={{ "--reveal-delay": "0ms" } as React.CSSProperties}
-            className="text-[28px] font-medium leading-[1.12] tracking-[-0.025em] text-[var(--text-on-light-primary)] sm:text-[42px]"
+            className="text-balance font-sans text-[30px] font-normal leading-[1.2] tracking-[-0.025em] text-[#292524] sm:text-[40px] sm:leading-[48px]"
           >
             {copy.title}
           </h2>
           <p
             data-reveal
             style={{ "--reveal-delay": "75ms" } as React.CSSProperties}
-            className="mt-3.5 text-[14px] leading-[1.6] text-[var(--text-on-light-secondary)] sm:mt-4 sm:text-[15.5px]"
+            className="mt-3.5 text-pretty text-[14px] leading-[1.6] text-[var(--text-on-light-secondary)] sm:mt-4 sm:text-[15.5px]"
           >
             {copy.subtitle}
           </p>

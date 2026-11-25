@@ -91,12 +91,34 @@ const STAGE_STYLES = `
     padding-bottom: 3.5rem !important;
   }
   .capture-stage-pricing .rail-container {
-    padding-top: 1.35rem !important;
-    padding-bottom: 1.35rem !important;
+    padding-top: 0.75rem !important;
+    padding-bottom: 0.75rem !important;
+  }
+  .capture-stage-pricing .rail-container h1 {
+    margin-top: 0.35rem !important;
+    font-size: 1.85rem !important;
+  }
+  .capture-stage-pricing .rail-container p {
+    margin-top: 0.25rem !important;
+    font-size: 0.85rem !important;
+  }
+  .capture-stage-pricing .rail-container > div:last-child {
+    margin-top: 0.6rem !important;
+    padding-top: 0.6rem !important;
   }
   .capture-stage-pricing .rail-container-light {
-    padding-top: 1.75rem !important;
-    padding-bottom: 1.75rem !important;
+    padding-top: 0.9rem !important;
+    padding-bottom: 0.9rem !important;
+  }
+  .capture-stage-pricing .rail-container-light article {
+    padding: 0.9rem !important;
+  }
+  .capture-stage-pricing .rail-container-light article ul {
+    margin-top: 0.65rem !important;
+    padding-top: 0.65rem !important;
+  }
+  .capture-stage-pricing .rail-container-light article > div:last-child {
+    margin-top: 0.75rem !important;
   }
   .capture-stage-footer #contacto > div:first-child {
     padding-top: 1.25rem !important;

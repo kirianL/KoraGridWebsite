@@ -253,10 +253,10 @@ export const PricingPage: React.FC<PricingPageProps> = ({ onOpenDemo, onBackHome
             {copy.backLabel}
           </button>
 
-          <h1 className="mt-4 max-w-[680px] text-[30px] font-medium leading-[1.08] tracking-[-0.03em] text-[var(--text-primary)] sm:text-[42px]">
+          <h1 className="mt-4 max-w-[680px] text-balance text-[30px] font-medium leading-[1.08] tracking-[-0.03em] text-[var(--text-primary)] sm:text-[42px]">
             {copy.heroTitle}
           </h1>
-          <p className="mt-3 max-w-[560px] text-[14.5px] leading-[1.55] text-[var(--text-secondary)] sm:text-[15.5px]">
+          <p className="mt-3 max-w-[640px] text-pretty text-[14.5px] leading-[1.55] text-[var(--text-secondary)] sm:text-[15.5px]">
             {copy.heroSubtitle}
           </p>
 
@@ -437,7 +437,7 @@ export const PricingPage: React.FC<PricingPageProps> = ({ onOpenDemo, onBackHome
 
           {/* Technical Comparison Matrix */}
           <div className="mt-16 border-t border-[var(--border-light-subtle)] pt-12 sm:mt-20 sm:pt-16">
-            <h2 className="text-[24px] font-medium tracking-[-0.02em] text-[var(--text-on-light-primary)] sm:text-[30px]">
+            <h2 className="font-sans text-[28px] font-normal leading-[1.2] tracking-[-0.025em] text-[#292524] sm:text-[40px] sm:leading-[48px]">
               {copy.matrixTitle}
             </h2>
 

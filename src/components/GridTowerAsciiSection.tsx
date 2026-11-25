@@ -27,13 +27,13 @@ export const GridTowerAsciiSection: React.FC<GridTowerAsciiSectionProps> = ({
             </p>
             <h2
               id="subestacion-heading"
-              className="mt-1 text-[clamp(1.6rem,2.9vw,2.25rem)] font-medium leading-[1.15] tracking-tight text-[var(--text-primary)]"
+              className="mt-1 text-balance font-sans text-[30px] font-normal leading-[1.2] tracking-[-0.025em] text-[var(--text-primary)] sm:text-[40px] sm:leading-[48px]"
             >
               {isEn
                 ? "We build the telemetry layer to transform it."
                 : "Construimos la telemetría base para transformarla."}
             </h2>
-            <p className="mt-6 text-[14.5px] leading-[1.6] text-[var(--text-secondary)]">
+            <p className="mt-6 text-pretty text-[14.5px] leading-[1.6] text-[var(--text-secondary)]">
               {isEn
                 ? "Direct optical acquisition on 13.8 and 34.5 kV buses via Modbus TCP and DNP3, reconciled with utility revenue meters to anticipate thermal overloads and back ISO 14064 audits."
                 : "Lectura óptica directa en barras de 13.8 y 34.5 kV mediante Modbus TCP y DNP3, conciliada con medición fiscal nacional para anticipar sobrecargas térmicas y respaldar auditorías ISO 14064."}

@@ -21,7 +21,7 @@ export const SplitTraceability: React.FC<SplitTraceabilityProps> = ({ onOpenDemo
           <h2
             data-reveal
             style={{ "--reveal-delay": "0ms" } as React.CSSProperties}
-            className="text-[28px] font-normal leading-[1.12] tracking-[-0.025em] text-[var(--text-primary)] sm:text-[38px]"
+            className="font-sans text-[30px] font-normal leading-[1.2] tracking-[-0.025em] text-[var(--text-primary)] sm:text-[40px] sm:leading-[48px]"
           >
             {copy.title}
           </h2>
